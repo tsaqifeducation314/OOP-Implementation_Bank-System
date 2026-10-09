@@ -2,6 +2,16 @@
 #include <iostream>
 using namespace std;
 
+//constructor class rekening 
+Rekening::Rekening(string pemilik, string nomor, string tanggal, double saldoAwal) {
+    nama = pemilik;
+    nomorRekening = nomor;
+    tanggalDibuka = tanggal;
+    saldo = saldoAwal;
+    statusRekening = true;
+}
+
+
 // fungsi untuk melihat saldo
 double Rekening::lihatSaldo() {
     return saldo;
@@ -9,6 +19,7 @@ double Rekening::lihatSaldo() {
 
 // fungsi untuk melihat informasi rekening 
 void Rekening::lihatInformasiRekening() {
+    cout << "Nama            : " << nama << endl;
     cout << "Nomor           : " << nomorRekening << endl;
     cout << "Tanggal Dibuka  : " << tanggalDibuka << endl;
     cout << "Status Rekening : " << boolalpha << statusRekening << endl;
