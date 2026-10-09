@@ -46,7 +46,7 @@ bool Rekening :: validasiStatusAktif() {
 // CHILD CLASS REKENING TABUNGAN 
 
 // constructor class rekening tabungan
-RekeningTabungan :: RekeningTabungan(string pemilik, string nomor, string tanggal, double saldoAwal) : Rekening(nomor, tanggal, pemilik, saldoAwal) {}
+RekeningTabungan :: RekeningTabungan(string pemilik, string nomor, string tanggal, double saldoAwal) : Rekening(pemilik, nomor, tanggal, saldoAwal) {}
 
 // fungsi untuk menghitung bunga tahunan pada rekening tabungan 
 double RekeningTabungan::hitungBunga() {
@@ -64,7 +64,7 @@ void RekeningTabungan :: lihatInformasiRekening() {
 // CHILD CLASS REKENING GIRO 
 
 // constructor class rekening giro 
-RekeningGiro :: RekeningGiro(string pemilik, string nomor, string tanggal, double saldoAwal) : Rekening(nomor, tanggal, pemilik, saldoAwal) {}
+RekeningGiro :: RekeningGiro(string pemilik, string nomor, string tanggal, double saldoAwal) : Rekening(pemilik, nomor, tanggal, saldoAwal) {}
 
 // fungsi untuk menghitung biaya administrasi yang harus dibayarkan
 bool RekeningGiro :: bayarBiayaAdministrasi() {
@@ -88,7 +88,7 @@ void RekeningGiro :: lihatInformasiRekening() {
 // CHILD CLASS REKENING DEPOSITO 
 
 // constructor class rekening giro 
-RekeningDeposito :: RekeningDeposito(string pemilik, string nomor, string tanggal, double saldoAwal) : Rekening(nomor, tanggal, pemilik, saldoAwal) {}
+RekeningDeposito :: RekeningDeposito(string pemilik, string nomor, string tanggal, double saldoAwal) : Rekening(pemilik, nomor, tanggal, saldoAwal) {}
 
 // fungsi untuk menghitung bunga tahunan pada rekening tabungan
 double RekeningDeposito :: hitungBunga() {

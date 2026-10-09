@@ -31,7 +31,7 @@ class Rekening {
 // CHILD CLASS REKENING TABUNGAN 
 class RekeningTabungan : public Rekening {
     public: 
-        RekeningTabungan :: RekeningTabungan(string pemilik, string nomor, string tanggal, double saldoAwal);
+        RekeningTabungan(string pemilik, string nomor, string tanggal, double saldoAwal);
 
         double hitungBunga() override;
         void lihatInformasiRekening() override;
@@ -44,10 +44,10 @@ class RekeningTabungan : public Rekening {
 // CHILD CLASS REKENING GIRO 
 class RekeningGiro : public Rekening {
     public: 
-        RekeningGiro :: RekeningGiro(string pemilik, string nomor, string tanggal, double saldoAwal);
+        RekeningGiro(string pemilik, string nomor, string tanggal, double saldoAwal);
 
         bool bayarBiayaAdministrasi();
-        void lihatInformasiRekening();
+        void lihatInformasiRekening() override;
 
     private: 
         double biayaAdministrasi = 180000;
@@ -57,11 +57,11 @@ class RekeningGiro : public Rekening {
 // CHILD CLASS REKENING DEPOSITO 
 class RekeningDeposito : public Rekening {
         public: 
-            RekeningDeposito :: RekeningDeposito(string pemilik, string nomor, string tanggal, double saldoAwal);
+            RekeningDeposito(string pemilik, string nomor, string tanggal, double saldoAwal);
 
-            double hitungBunga();
+            double hitungBunga() override;
             bool cekJatuhTempo();
-            void lihatInformasiRekening();
+            void lihatInformasiRekening() override;
 
         private:
             double nominalAwal; 
