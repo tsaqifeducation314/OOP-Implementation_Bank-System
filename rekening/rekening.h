@@ -2,7 +2,7 @@
 #define REKENING_H
 
 #include <string>
-using namespace std; 
+using namespace std;
 
 // PARENT CLASS REKENING
 class Rekening {
@@ -50,8 +50,24 @@ class RekeningGiro : public Rekening {
         void lihatInformasiRekening();
 
     private: 
-        double biayaAdministrasi;
+        double biayaAdministrasi = 180000;
 };
 
+
+// CHILD CLASS REKENING DEPOSITO 
+class RekeningDeposito : public Rekening {
+        public: 
+            RekeningDeposito :: RekeningDeposito(string pemilik, string nomor, string tanggal, double saldoAwal);
+
+            double hitungBunga();
+            bool cekJatuhTempo();
+            void lihatInformasiRekening();
+
+        private:
+            double nominalAwal; 
+            int jangkaWaktu;
+            double sukuBunga = 5; 
+            string tanggalJatuhTempo; 
+};
 
 #endif

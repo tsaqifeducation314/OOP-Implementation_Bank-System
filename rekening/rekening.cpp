@@ -83,3 +83,24 @@ void RekeningGiro :: lihatInformasiRekening() {
     Rekening :: lihatInformasiRekening();
     cout << "Biaya Admin     : " << biayaAdministrasi << endl;
 }
+
+
+// CHILD CLASS REKENING DEPOSITO 
+
+// constructor class rekening giro 
+RekeningDeposito :: RekeningDeposito(string pemilik, string nomor, string tanggal, double saldoAwal) : Rekening(nomor, tanggal, pemilik, saldoAwal) {}
+
+// fungsi untuk menghitung bunga tahunan pada rekening tabungan
+double RekeningDeposito :: hitungBunga() {
+    return saldo * sukuBunga / 100;
+}
+
+// fungsi untuk melihat informasi rekening deposito  
+void RekeningDeposito :: lihatInformasiRekening() {
+    Rekening :: lihatInformasiRekening();
+    cout << "Nominal Awal    : " << nominalAwal << endl; 
+    cout << "Jangka Waktu    : " << jangkaWaktu << endl; 
+    cout << "Suku Bunga      : " << sukuBunga << endl;
+    cout << "Jatuh Tempo     : " << tanggalJatuhTempo << endl;
+}
+
