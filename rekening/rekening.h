@@ -31,7 +31,7 @@ class Rekening {
 // CHILD CLASS REKENING TABUNGAN 
 class RekeningTabungan : public Rekening {
     public: 
-        RekeningTabungan::RekeningTabungan(string pemilik, string nomor, string tanggal, double saldoAwal);
+        RekeningTabungan :: RekeningTabungan(string pemilik, string nomor, string tanggal, double saldoAwal);
 
         double hitungBunga() override;
         void lihatInformasiRekening() override;
@@ -40,5 +40,18 @@ class RekeningTabungan : public Rekening {
         double sukuBunga = 0.5; 
         double saldoMinimum = 50000; 
 };
+
+// CHILD CLASS REKENING GIRO 
+class RekeningGiro : public Rekening {
+    public: 
+        RekeningGiro :: RekeningGiro(string pemilik, string nomor, string tanggal, double saldoAwal);
+
+        bool bayarBiayaAdministrasi();
+        void lihatInformasiRekening();
+
+    private: 
+        double biayaAdministrasi;
+};
+
 
 #endif
