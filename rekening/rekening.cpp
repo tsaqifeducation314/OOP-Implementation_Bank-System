@@ -2,6 +2,8 @@
 #include <iostream>
 using namespace std;
 
+// PARENT CLASS REKENING  
+
 //constructor class rekening 
 Rekening::Rekening(string pemilik, string nomor, string tanggal, double saldoAwal) {
     nama = pemilik;
@@ -31,12 +33,30 @@ void Rekening::ubahStatus() {
     statusRekening = !statusRekening;
 }
 
-// fungsi untuk menghitung bunga tahunan dengan asumsi suku bunga 0.5%  
+// fungsi untuk menghitung bunga tahunan, bernilai 0 karena 
 double Rekening::hitungBunga() {
-    return saldo * 0.5 / 100;
+    return 0;
 }
 
 // fungsi untuk memvalidasi status aktif rekening 
 bool Rekening::validasiStatusAktif() {
     return statusRekening;
+}
+
+
+// CHILD CLASS REKENING TABUNGAN 
+
+// constructor class rekening tabungan
+RekeningTabungan::RekeningTabungan(string pemilik, string nomor, string tanggal, double saldoAwal):Rekening(nomor, tanggal, pemilik, saldoAwal) {}
+
+// fungsi untuk menghitung bunga tahunan pada rekening tabungan 
+double RekeningTabungan::hitungBunga() {
+    return saldo * sukuBunga / 100;
+}
+
+// fungsi untuk melihat informasi rekening tabungan  
+void RekeningTabungan::lihatInformasiRekening() {
+    Rekening::lihatInformasiRekening();
+    cout << "Suku Bunga      : " << sukuBunga << endl;
+    cout << "Saldo Minimum   : " << saldoMinimum << endl;
 }
