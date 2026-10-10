@@ -16,6 +16,8 @@ class Rekening {
 
         virtual ~Rekening() {};
 
+        friend void tampilkanRingkasanRekening(const Rekening& rekening);
+
     private:
         string nomorRekening; 
         string tanggalDibuka;

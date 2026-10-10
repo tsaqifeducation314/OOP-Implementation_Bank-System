@@ -21,7 +21,7 @@ double Rekening :: lihatSaldo() {
 // fungsi untuk melihat informasi rekening 
 void Rekening :: lihatInformasiRekening() {
     cout << "Nama            : " << nama << endl;
-    cout << "Nomor           : " << nomorRekening << endl;
+    cout << "Nomor Rekening  : " << nomorRekening << endl;
     cout << "Tanggal Dibuka  : " << tanggalDibuka << endl;
     cout << "Status Rekening : " << boolalpha << statusRekening << endl;
     cout << "Saldo           : " << saldo << endl; 
@@ -40,6 +40,13 @@ double Rekening :: hitungBunga() {
 // fungsi untuk memvalidasi status aktif rekening 
 bool Rekening :: validasiStatusAktif() {
     return statusRekening;
+}
+
+// fungsi untuk menampilkan ringkasan rekening 
+void tampilkanRingkasanRekening(const Rekening& rekening) {
+     cout << "Nomor Rekening  : " << rekening.nomorRekening << endl;
+     cout << "Saldo           : " << rekening.saldo << endl;
+     cout << "Status          : " << rekening.statusRekening << endl;
 }
 
 
