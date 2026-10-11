@@ -49,6 +49,11 @@ void tampilkanRingkasanRekening(const Rekening& rekening) {
      cout << "Status          : " << rekening.statusRekening << endl;
 }
 
+// getter untuk nomor rekening 
+string Rekening :: getNomorRekening() const {
+    return nomorRekening;
+}
+
 
 // CHILD CLASS REKENING TABUNGAN 
 

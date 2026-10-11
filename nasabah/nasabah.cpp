@@ -1,5 +1,5 @@
 #include "nasabah.h"
-#include "rekening.h"
+#include "../rekening/rekening.h"
 #include <iostream> 
 using namespace std; 
 

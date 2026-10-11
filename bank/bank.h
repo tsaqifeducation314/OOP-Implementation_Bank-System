@@ -1,7 +1,7 @@
 #ifndef BANK_H
 #define BANK_H
 
-#include "nasabah.h"
+#include "../nasabah/nasabah.h"
 #include <string>
 #include <vector>
 using namespace std; 

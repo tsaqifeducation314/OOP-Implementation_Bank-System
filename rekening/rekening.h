@@ -18,6 +18,8 @@ class Rekening {
 
         friend void tampilkanRingkasanRekening(const Rekening& rekening);
 
+        string getNomorRekening() const; 
+
     private:
         string nomorRekening; 
         string tanggalDibuka;

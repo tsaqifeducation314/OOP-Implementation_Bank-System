@@ -21,8 +21,6 @@ class Nasabah {
     public: 
         Nasabah(string id, string nama, string tanggalLahir, string alamat, string nomorTelepon, string email); 
 
-        ~Nasabah();
-
         void lihatInformasiPribadi() const;
         void lihatRekening();
         void perbaruiInformasiPribadi();
