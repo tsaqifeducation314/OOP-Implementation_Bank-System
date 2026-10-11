@@ -4,8 +4,10 @@
 #include <string>
 using namespace std; 
 
+// CLASS REKENING
 class Rekening;
 
+// CLASS NASABAH
 class Nasabah {
     private: 
         string idNasabah;
@@ -21,11 +23,12 @@ class Nasabah {
 
         ~Nasabah();
 
-        void lihatInformasiPribadi();
+        void lihatInformasiPribadi() const;
         void lihatRekening();
         void perbaruiInformasiPribadi();
 
         void setRekening(Rekening* rekening);
+        string getIdNasabah() const;
 };
 
 #endif 

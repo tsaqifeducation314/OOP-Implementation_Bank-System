@@ -15,7 +15,7 @@ Nasabah :: Nasabah(string id, string nama, string tanggalLahir, string alamat, s
 }
 
 // fungsi untuk melihat informasi pribadi nasabah 
-void Nasabah :: lihatInformasiPribadi() {
+void Nasabah :: lihatInformasiPribadi() const {
     cout << "ID Nasabah      : " << idNasabah << endl; 
     cout << "Nama            : " << nama << endl; 
     cout << "Tanggal Lahir   : " << tanggalLahir << endl; 
@@ -50,4 +50,9 @@ void Nasabah :: perbaruiInformasiPribadi() {
 // setter untuk rekening 
 void Nasabah :: setRekening(Rekening* rekening) {
     this->rekening = rekening; 
+}
+
+// getter untuk ID nasabah 
+string Nasabah :: getIdNasabah() const {
+    return idNasabah;
 }
