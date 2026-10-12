@@ -315,3 +315,116 @@ void LayananBank :: tarik() {
     cout << "Saldo terbaru: "
          << rekening->lihatSaldo() << endl;
 }
+
+// fungsi untuk transfer 
+
+void LayananBank :: transfer() {
+    string nomorPengirim;
+    string nomorPenerima;
+    string idTransaksi;
+    string tanggal;
+    string keterangan;
+    double jumlah;
+
+    cout << "\n----- TRANSFER -----" << endl;
+
+    cout << "Nomor Rekening Pengirim: ";
+    getline(cin >> ws, nomorPengirim);
+
+    Rekening* rekeningPengirim = nullptr;
+
+    for (const auto& data : daftarRekening) {
+        if (data->getNomorRekening() == nomorPengirim) {
+            rekeningPengirim = data.get();
+            break;
+        }
+    }
+
+    if (rekeningPengirim == nullptr) {
+        cout << "Rekening pengirim tidak ditemukan." << endl;
+        return;
+    }
+
+    cout << "Nomor Rekening Penerima: ";
+    getline(cin, nomorPenerima);
+
+    if (nomorPengirim == nomorPenerima) {
+        cout << "Rekening pengirim dan penerima tidak boleh sama."
+             << endl;
+        return;
+    }
+
+    Rekening* rekeningPenerima = nullptr;
+
+    for (const auto& data : daftarRekening) {
+        if (data->getNomorRekening() == nomorPenerima) {
+            rekeningPenerima = data.get();
+            break;
+        }
+    }
+
+    if (rekeningPenerima == nullptr) {
+        cout << "Rekening penerima tidak ditemukan." << endl;
+        return;
+    }
+
+    cout << "ID Transaksi: ";
+    getline(cin, idTransaksi);
+
+    cout << "Tanggal Transaksi: ";
+    getline(cin, tanggal);
+
+    cout << "Jumlah Transfer: ";
+    if (!(cin >> jumlah)) {
+        cout << "Jumlah tidak valid." << endl;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        return;
+    }
+
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    if (jumlah <= 0) {
+        cout << "Jumlah transfer harus lebih dari nol." << endl;
+        return;
+    }
+
+    cout << "Keterangan: ";
+    getline(cin, keterangan);
+
+    if (!rekeningPengirim->tarikDana(jumlah)) {
+        cout << "Transfer dibatalkan." << endl;
+        return;
+    }
+
+    if (!rekeningPenerima->setorDana(jumlah)) {
+        rekeningPengirim->setorDana(jumlah);
+        cout << "Transfer gagal. Dana dikembalikan ke rekening "
+             << "pengirim." << endl;
+        return;
+    }
+
+    auto transaksi = make_unique<Transaksi>(
+        idTransaksi,
+        tanggal,
+        jumlah,
+        "3",
+        "Berhasil",
+        keterangan
+    );
+
+    transaksi->setRekeningPengirim(rekeningPengirim);
+    transaksi->setRekeningPenerima(rekeningPenerima);
+
+    transaksi->lihatDetailTransaksi();
+
+    daftarTransaksi.push_back(move(transaksi));
+
+    cout << "Transfer berhasil." << endl;
+    cout << "Saldo pengirim terbaru: "
+         << rekeningPengirim->lihatSaldo() << endl;
+    cout << "Saldo penerima terbaru: "
+         << rekeningPenerima->lihatSaldo() << endl;
+}
+
+
