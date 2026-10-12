@@ -23,7 +23,7 @@ class Rekening {
         virtual bool setorDana(double jumlah);
         virtual bool tarikDana(double jumlah);
 
-        bool isAktif() const; 
+        bool getStatusRekening() const; 
         void setStatusRekening(bool status);
 
     private:

@@ -1,5 +1,6 @@
 #include "layanan.h"
 #include "../nasabah/nasabah.h"
+#include "../autentikasi/autentikasi.h"
 
 #include <iostream>
 #include <string>
@@ -10,7 +11,7 @@ using namespace std;
 
 // constructor class layanan bank 
 LayananBank :: LayananBank(string namaBank)
-    : bank(namaBank), nasabahAktif(nullptr) {
+    : bank(namaBank), nasabahAktif(nullptr), autentikasi(nullptr) {
 }
 
 // fungsi registrasi nasabah
@@ -449,7 +450,7 @@ void LayananBank :: tutupRekening() {
         return;
     }
 
-    if (!rekening->isAktif()) {
+    if (!rekening->getStatusRekening()) {
         cout << "Rekening sudah nonaktif." << endl;
         return;
     }
@@ -483,7 +484,7 @@ void LayananBank::aktifkanRekening() {
         return;
     }
 
-    if (rekening->isAktif()) {
+    if (rekening->getStatusRekening()) {
         cout << "Rekening sudah aktif." << endl;
         return;
     }
@@ -494,4 +495,99 @@ void LayananBank::aktifkanRekening() {
     rekening->lihatInformasiRekening();
 }
 
+// setter autentikasi 
+void LayananBank :: setAutentikasi(Autentikasi* autentikasi) {
+    this->autentikasi = autentikasi;
+}
+
+// fungsi untuk membuat kartu ATM
+void LayananBank :: buatKartuATM() {
+    if (autentikasi == nullptr) {
+        cout << "Autentikasi belum terhubung." << endl;
+        return;
+    }
+
+    string nomorRekening;
+    string nomorKartu;
+    string tanggalTerbit;
+    string tanggalKadaluarsa;
+    string pin;
+
+    cout << "\n----- PEMBUATAN KARTU ATM -----" << endl;
+    cout << "Nomor Rekening: ";
+    getline(cin >> ws, nomorRekening);
+
+    Rekening* rekening = nullptr;
+
+    for (const auto& data : daftarRekening) {
+        if (data->getNomorRekening() == nomorRekening) {
+            rekening = data.get();
+            break;
+        }
+    }
+
+    if (rekening == nullptr) {
+        cout << "Rekening tidak ditemukan." << endl;
+        return;
+    }
+
+    if (!rekening->getStatusRekening()) {
+        cout << "Rekening tidak aktif." << endl;
+        return;
+    }
+
+    for (const auto& kartu : daftarKartu) {
+        if (kartu->getRekening() == rekening) {
+            cout << "Rekening ini sudah memiliki kartu ATM." << endl;
+            return;
+        }
+    }
+
+    cout << "Nomor Kartu: ";
+    getline(cin, nomorKartu);
+
+    for (const auto& kartu : daftarKartu) {
+        if (kartu->getNomorKartu() == nomorKartu) {
+            cout << "Nomor kartu sudah digunakan." << endl;
+            return;
+        }
+    }
+
+    cout << "Tanggal Terbit (DD-MM-YYYY): ";
+    getline(cin, tanggalTerbit);
+
+    cout << "Tanggal Kadaluarsa (DD-MM-YYYY): ";
+    getline(cin, tanggalKadaluarsa);
+
+    cout << "PIN Awal (6 digit): ";
+    getline(cin, pin);
+
+    if (pin.length() != 6) {
+        cout << "PIN harus terdiri dari 6 digit." << endl;
+        return;
+    }
+
+    for (char digit : pin) {
+        if (!isdigit(static_cast<unsigned char>(digit))) {
+            cout << "PIN hanya boleh berisi angka." << endl;
+            return;
+        }
+    }
+
+    auto kartuBaru = make_unique<KartuATM>(
+        nomorKartu,
+        tanggalTerbit,
+        tanggalKadaluarsa,
+        pin,
+        rekening
+    );
+
+    KartuATM* ptrKartu = kartuBaru.get();
+
+    daftarKartu.push_back(move(kartuBaru));
+    autentikasi->daftarkanKartu(ptrKartu);
+
+    cout << "Kartu ATM berhasil dibuat." << endl;
+    cout << "Nomor Kartu: " << ptrKartu->getNomorKartu() << endl;
+}
 
