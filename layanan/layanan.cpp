@@ -177,3 +177,141 @@ void LayananBank::buatRekening() {
     cout << "\nRekening berhasil dibuat!" << endl;
     ptrRekening->lihatInformasiRekening();
 }
+
+// fungsi untuk setor 
+
+void LayananBank :: setor() {
+    string nomorRekening;
+    string idTransaksi;
+    string tanggal;
+    string keterangan;
+    double jumlah;
+
+    cout << "\n----- SETOR TUNAI -----" << endl;
+
+    cout << "Nomor Rekening: ";
+    getline(cin >> ws, nomorRekening);
+
+    Rekening* rekening = nullptr;
+
+    for (const auto& data : daftarRekening) {
+        if (data->getNomorRekening() == nomorRekening) {
+            rekening = data.get();
+            break;
+        }
+    }
+
+    if (rekening == nullptr) {
+        cout << "Rekening tidak ditemukan." << endl;
+        return;
+    }
+
+    cout << "ID Transaksi: ";
+    getline(cin, idTransaksi);
+
+    cout << "Tanggal Transaksi: ";
+    getline(cin, tanggal);
+
+    cout << "Jumlah Setoran: Rp";
+    if (!(cin >> jumlah)) {
+        cout << "Jumlah tidak valid." << endl;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize> :: max(), '\n');
+        return;
+    }   
+
+    cin.ignore(numeric_limits<streamsize> :: max(), '\n');
+
+    cout << "Keterangan: ";
+    getline(cin, keterangan);
+
+    if (!rekening->setorDana(jumlah)) {
+        return;
+    }
+
+    auto transaksi = make_unique<Transaksi>(
+        idTransaksi,
+        tanggal,
+        jumlah,
+        "1",
+        "Berhasil",
+        keterangan
+    );
+
+    transaksi->setRekening(rekening);
+    transaksi->lihatDetailTransaksi();
+
+    daftarTransaksi.push_back(move(transaksi));
+
+    cout << "Saldo terbaru: "
+         << rekening->lihatSaldo() << endl;
+}
+
+// fungsi untuk tarik 
+
+void LayananBank :: tarik() {
+    string nomorRekening;
+    string idTransaksi;
+    string tanggal;
+    string keterangan;
+    double jumlah;
+
+    cout << "\n----- TARIK TUNAI -----" << endl;
+
+    cout << "Nomor Rekening: ";
+    getline(cin >> ws, nomorRekening);
+
+    Rekening* rekening = nullptr;
+
+    for (const auto& data : daftarRekening) {
+        if (data->getNomorRekening() == nomorRekening) {
+            rekening = data.get();
+            break;
+        }
+    }
+
+    if (rekening == nullptr) {
+        cout << "Rekening tidak ditemukan." << endl;
+        return;
+    }
+
+    cout << "ID Transaksi: ";
+    getline(cin, idTransaksi);
+
+    cout << "Tanggal Transaksi: ";
+    getline(cin, tanggal);
+
+    cout << "Jumlah Penarikan: Rp";
+    if (!(cin >> jumlah)) {
+        cout << "Jumlah tidak valid." << endl;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize> :: max(), '\n');
+        return;
+    }
+
+    cin.ignore(numeric_limits<streamsize> :: max(), '\n');
+
+    cout << "Keterangan: ";
+    getline(cin, keterangan);
+
+    if (!rekening->tarikDana(jumlah)) {
+        return;
+    }
+
+    auto transaksi = make_unique<Transaksi>(
+        idTransaksi,
+        tanggal,
+        jumlah,
+        "2",
+        "Berhasil",
+        keterangan
+    );
+
+    transaksi->setRekening(rekening);
+    transaksi->lihatDetailTransaksi();
+
+    daftarTransaksi.push_back(move(transaksi));
+
+    cout << "Saldo terbaru: "
+         << rekening->lihatSaldo() << endl;
+}

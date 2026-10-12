@@ -116,3 +116,42 @@ void RekeningDeposito :: lihatInformasiRekening() {
     cout << "Jatuh Tempo     : " << tanggalJatuhTempo << endl;
 }
 
+// fungsi untuk setor dana 
+bool Rekening :: setorDana(double jumlah) {
+    if (!statusRekening) {
+        cout << "Rekening tidak aktif." << endl;
+        return false;
+    }
+
+    if (jumlah <= 0) {
+        cout << "Jumlah setoran harus lebih dari nol." << endl;
+        return false;
+    }
+
+    saldo += jumlah;
+    cout << "Setoran berhasil." << endl;
+    return true;
+}
+
+// fungsi untuk tarik dana 
+bool Rekening :: tarikDana(double jumlah) {
+    if (!statusRekening) {
+        cout << "Rekening tidak aktif." << endl;
+        return false;
+    }
+
+    if (jumlah <= 0) {
+        cout << "Jumlah penarikan harus lebih dari nol." << endl;
+        return false;
+    }
+
+    if (jumlah > saldo) {
+        cout << "Saldo tidak mencukupi." << endl;
+        return false;
+    }
+
+    saldo -= jumlah;
+    cout << "Penarikan berhasil." << endl;
+    return true;
+}
+

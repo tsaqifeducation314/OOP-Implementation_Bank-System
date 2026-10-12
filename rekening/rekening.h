@@ -20,6 +20,9 @@ class Rekening {
 
         string getNomorRekening() const; 
 
+        virtual bool setorDana(double jumlah);
+        virtual bool tarikDana(double jumlah);
+
     private:
         string nomorRekening; 
         string tanggalDibuka;

@@ -3,6 +3,7 @@
 
 #include "../bank/bank.h"
 #include "../rekening/rekening.h"
+#include "../transaksi/transaksi.h"
 #include <memory>
 #include <vector>
 
@@ -18,6 +19,7 @@ class LayananBank {
         Bank bank; 
         Nasabah* nasabahAktif; 
         vector<unique_ptr<Rekening>> daftarRekening;
+        vector<unique_ptr<Transaksi>> daftarTransaksi; 
 
     public: 
         LayananBank(string namaBank);
