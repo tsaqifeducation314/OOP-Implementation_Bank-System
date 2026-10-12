@@ -591,3 +591,25 @@ void LayananBank :: buatKartuATM() {
     cout << "Nomor Kartu: " << ptrKartu->getNomorKartu() << endl;
 }
 
+//getter bank 
+Bank& LayananBank :: getBank() {
+    return bank;
+}
+
+// getter daftar rekening 
+const vector<unique_ptr<Rekening>>&
+LayananBank :: getDaftarRekening() const {
+    return daftarRekening;
+}
+
+// getter daftar transaksi
+const vector<unique_ptr<Transaksi>>&
+LayananBank :: getDaftarTransaksi() const {
+    return daftarTransaksi;
+}
+
+// getter daftar kartu ATM
+const vector<unique_ptr<KartuATM>>&
+LayananBank :: getDaftarKartu() const {
+    return daftarKartu;
+}

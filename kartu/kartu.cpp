@@ -90,3 +90,35 @@ bool KartuATM :: getStatusKartu() const {
 Rekening* KartuATM :: getRekening() const {
     return rekening;
 }
+
+// getter tanggal terbit kartu 
+string KartuATM :: getTanggalTerbit() const {
+    return tanggalTerbit;
+}
+
+// getter tanggal kadaluarsa kartu 
+string KartuATM :: getTanggalKadaluarsa() const {
+    return tanggalKadaluarsa;
+}
+
+// getter pin kartu 
+string KartuATM :: getPIN() const {
+    return pin;
+}
+
+// getter banyak percobaan pin 
+int KartuATM :: getPercobaanPIN() const {
+    return percobaanPIN;
+}
+
+// setter status kartu
+void KartuATM :: setStatusKartu(bool status) {
+    this->status = status;
+}
+
+// setter banyak percobaan pin 
+void KartuATM :: setPercobaanPIN(int percobaan) {
+    if (percobaan >= 0) {
+        percobaanPIN = percobaan;
+    }
+}

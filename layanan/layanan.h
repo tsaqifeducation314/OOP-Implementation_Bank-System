@@ -47,6 +47,11 @@ class LayananBank {
         void buatKartuATM(); 
 
         void setAutentikasi(Autentikasi* autentikasi);
+
+        Bank& getBank();
+        const vector<unique_ptr<Rekening>>& getDaftarRekening() const;
+        const vector<unique_ptr<Transaksi>>& getDaftarTransaksi() const;
+        const vector<unique_ptr<KartuATM>>& getDaftarKartu() const;
 };
 
 #endif 

@@ -35,6 +35,13 @@ public:
     string getNomorKartu() const;
     bool getStatusKartu() const;
     Rekening* getRekening() const;
+    string getTanggalTerbit() const;
+    string getTanggalKadaluarsa() const;
+    string getPIN() const;
+    int getPercobaanPIN() const;
+
+    void setStatusKartu(bool status);
+    void setPercobaanPIN(int percobaan);
 };
 
 #endif
