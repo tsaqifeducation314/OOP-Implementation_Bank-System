@@ -27,7 +27,11 @@ class Nasabah {
 
         void setRekening(Rekening* rekening);
         string getIdNasabah() const;
-
+        string getNama() const;
+        string getTanggalLahir() const;
+        string getAlamat() const;
+        string getNomorTelepon() const;
+        string getEmail() const;
         Rekening* getRekening() const;
 };
 

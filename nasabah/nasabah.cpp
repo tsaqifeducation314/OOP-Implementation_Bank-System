@@ -61,3 +61,28 @@ string Nasabah :: getIdNasabah() const {
 Rekening* Nasabah :: getRekening() const {
     return rekening; 
 }
+
+// getter untuk nama nasabah
+string Nasabah :: getNama() const {
+    return nama;
+}
+
+// getter untuk tanggal lahir
+string Nasabah :: getTanggalLahir() const {
+    return tanggalLahir;
+}
+
+// getter untuk alamat
+string Nasabah :: getAlamat() const {
+    return alamat;
+}
+
+// getter untuk nomor telpon
+string Nasabah :: getNomorTelepon() const {
+    return nomorTelepon;
+}
+
+// getter untuk email 
+string Nasabah :: getEmail() const {
+    return email;
+}

@@ -73,3 +73,47 @@ void Transaksi :: setRekeningPenerima(Rekening* rekeningPenerima) {
     this->rekeningPenerima = rekeningPenerima; 
 }
 
+// getter ID transaksi
+string Transaksi :: getIdTransaksi() const {
+    return idTransaksi;
+}
+
+// getter tanggal
+string Transaksi :: getTanggal() const {
+    return tanggal;
+}
+
+// getter jumlah transaksi 
+double Transaksi :: getJumlah() const {
+    return jumlah;
+}
+
+// getter jenis transaksi 
+string Transaksi :: getJenis() const {
+    return jenis;
+}
+
+// getter status transaksi
+string Transaksi :: getStatus() const {
+    return status;
+}
+
+// getter keterangan transaksi
+string Transaksi :: getKeterangan() const {
+    return keterangan;
+}
+
+// getter rekening 
+Rekening* Transaksi :: getRekening() const {
+    return rekening;
+}
+
+// getter rekening pengirim
+Rekening* Transaksi :: getRekeningPengirim() const {
+    return rekeningPengirim;
+}
+
+// getter rekening penerima 
+Rekening* Transaksi :: getRekeningPenerima() const {
+    return rekeningPenerima;
+}

@@ -60,3 +60,8 @@ Nasabah* Bank :: cariNasabah(const string& idNasabah) {
 
     return nullptr; 
 }
+
+// getter daftar nasabah
+const vector<Nasabah>& Bank :: getDaftarNasabah() const {
+    return daftarNasabah;
+}

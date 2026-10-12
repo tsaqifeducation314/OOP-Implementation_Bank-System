@@ -164,3 +164,18 @@ bool Rekening :: getStatusRekening() const {
 void Rekening :: setStatusRekening(bool status) {
     statusRekening = status;
 }
+
+// getter untuk nama
+string Rekening :: getNama() const {
+    return nama;
+}
+
+// getter untuk tanggal buka 
+string Rekening :: getTanggalDibuka() const {
+    return tanggalDibuka;
+}
+
+// getter untuk saldo 
+double Rekening :: getSaldo() const {
+    return saldo;
+}

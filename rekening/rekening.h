@@ -19,12 +19,14 @@ class Rekening {
         friend void tampilkanRingkasanRekening(const Rekening& rekening);
 
         string getNomorRekening() const; 
+        bool getStatusRekening() const; 
+        void setStatusRekening(bool status);
+        string getNama() const;
+        string getTanggalDibuka() const;
+        double getSaldo() const;
 
         virtual bool setorDana(double jumlah);
         virtual bool tarikDana(double jumlah);
-
-        bool getStatusRekening() const; 
-        void setStatusRekening(bool status);
 
     private:
         string nomorRekening; 

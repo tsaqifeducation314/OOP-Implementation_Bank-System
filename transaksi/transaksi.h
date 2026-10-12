@@ -29,6 +29,15 @@ class Transaksi {
         void setRekening(Rekening* rekening);
         void setRekeningPengirim(Rekening* rekening);
         void setRekeningPenerima(Rekening* rekening);
+        string getIdTransaksi() const;
+        string getTanggal() const;
+        double getJumlah() const;
+        string getJenis() const;
+        string getStatus() const;
+        string getKeterangan() const;
+        Rekening* getRekening() const;
+        Rekening* getRekeningPengirim() const;
+        Rekening* getRekeningPenerima() const;
 };
 
 #endif

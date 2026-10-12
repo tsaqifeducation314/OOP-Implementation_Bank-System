@@ -21,6 +21,8 @@ class Bank {
         void lihatDaftarNasabah();
 
         Nasabah* cariNasabah(const string& idNasabah);
+
+        const vector<Nasabah>& getDaftarNasabah() const;
 };
 
 #endif
