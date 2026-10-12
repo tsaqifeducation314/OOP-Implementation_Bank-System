@@ -19,6 +19,8 @@ class Bank {
         void tambahNasabah(const Nasabah& nasabah);
         void hapusNasabah(const string& idNasabah);
         void lihatDaftarNasabah();
+
+        Nasabah* cariNasabah(const string& idNasabah);
 };
 
 #endif

@@ -49,3 +49,14 @@ void Bank :: lihatDaftarNasabah() {
         cout << "-------------------------" << endl;
     }
 }
+
+// fungsi untuk mencari nasabah berdasarkan ID 
+Nasabah* Bank :: cariNasabah(const string& idNasabah) {
+    for (Nasabah& nasabah : daftarNasabah) {
+        if (nasabah.getIdNasabah() == idNasabah) {
+            return &nasabah; 
+        }
+    }
+
+    return nullptr; 
+}
