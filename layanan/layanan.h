@@ -2,6 +2,9 @@
 #define LAYANAN_H
 
 #include "../bank/bank.h"
+#include "../rekening/rekening.h"
+#include <memory>
+#include <vector>
 
 // CLASS BANK 
 class Bank; 
@@ -14,6 +17,7 @@ class LayananBank {
     private:
         Bank bank; 
         Nasabah* nasabahAktif; 
+        vector<unique_ptr<Rekening>> daftarRekening;
 
     public: 
         LayananBank(string namaBank);

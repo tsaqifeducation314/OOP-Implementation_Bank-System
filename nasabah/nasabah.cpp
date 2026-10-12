@@ -56,3 +56,8 @@ void Nasabah :: setRekening(Rekening* rekening) {
 string Nasabah :: getIdNasabah() const {
     return idNasabah;
 }
+
+// getter untuk rekening nasabah 
+Rekening* Nasabah :: getRekening() const {
+    return rekening; 
+}

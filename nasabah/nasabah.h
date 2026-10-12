@@ -27,6 +27,8 @@ class Nasabah {
 
         void setRekening(Rekening* rekening);
         string getIdNasabah() const;
+
+        Rekening* getRekening() const;
 };
 
 #endif 
