@@ -23,6 +23,9 @@ class Rekening {
         virtual bool setorDana(double jumlah);
         virtual bool tarikDana(double jumlah);
 
+        bool isAktif() const; 
+        void setStatusRekening(bool status);
+
     private:
         string nomorRekening; 
         string tanggalDibuka;

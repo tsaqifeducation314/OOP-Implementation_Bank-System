@@ -155,3 +155,12 @@ bool Rekening :: tarikDana(double jumlah) {
     return true;
 }
 
+// fungsi untuk mengecek apakah rekening aktif
+bool Rekening::isAktif() const {
+    return statusRekening;
+}
+
+// setter status rekening 
+void Rekening::setStatusRekening(bool status) {
+    statusRekening = status;
+}

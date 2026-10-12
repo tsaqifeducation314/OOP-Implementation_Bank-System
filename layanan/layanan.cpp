@@ -427,4 +427,71 @@ void LayananBank :: transfer() {
          << rekeningPenerima->lihatSaldo() << endl;
 }
 
+// fungsi untuk menutup rekening 
+void LayananBank :: tutupRekening() {
+    string nomorRekening;
+
+    cout << "\n----- TUTUP REKENING -----" << endl;
+    cout << "Nomor Rekening: ";
+    getline(cin >> ws, nomorRekening);
+
+    Rekening* rekening = nullptr;
+
+    for (const auto& data : daftarRekening) {
+        if (data->getNomorRekening() == nomorRekening) {
+            rekening = data.get();
+            break;
+        }
+    }
+
+    if (rekening == nullptr) {
+        cout << "Rekening tidak ditemukan." << endl;
+        return;
+    }
+
+    if (!rekening->isAktif()) {
+        cout << "Rekening sudah nonaktif." << endl;
+        return;
+    }
+
+    rekening->setStatusRekening(false);
+
+    cout << "Rekening berhasil dinonaktifkan." << endl;
+    rekening->lihatInformasiRekening();
+}
+
+// fungsi untuk mengaktifkan rekening 
+
+void LayananBank::aktifkanRekening() {
+    string nomorRekening;
+
+    cout << "\n----- AKTIFKAN REKENING -----" << endl;
+    cout << "Nomor Rekening: ";
+    getline(cin >> ws, nomorRekening);
+
+    Rekening* rekening = nullptr;
+
+    for (const auto& data : daftarRekening) {
+        if (data->getNomorRekening() == nomorRekening) {
+            rekening = data.get();
+            break;
+        }
+    }
+
+    if (rekening == nullptr) {
+        cout << "Rekening tidak ditemukan." << endl;
+        return;
+    }
+
+    if (rekening->isAktif()) {
+        cout << "Rekening sudah aktif." << endl;
+        return;
+    }
+
+    rekening->setStatusRekening(true);
+
+    cout << "Rekening berhasil diaktifkan." << endl;
+    rekening->lihatInformasiRekening();
+}
+
 
