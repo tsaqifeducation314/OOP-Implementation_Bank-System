@@ -23,7 +23,12 @@ void Rekening :: lihatInformasiRekening() {
     cout << "Nama            : " << nama << endl;
     cout << "Nomor Rekening  : " << nomorRekening << endl;
     cout << "Tanggal Dibuka  : " << tanggalDibuka << endl;
-    cout << "Status Rekening : " << boolalpha << statusRekening << endl;
+    cout << "Status Rekening : ";
+    if (statusRekening == true) {
+        cout << "Aktif" << endl;
+    } else {
+        cout << "Tidak Aktif" << endl;
+    }
     cout << "Saldo           : " << saldo << endl; 
 }
 

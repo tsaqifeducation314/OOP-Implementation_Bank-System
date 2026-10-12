@@ -23,15 +23,14 @@ class Autentikasi {
         Autentikasi(string usernameAdmin, string passwordAdmin);
 
         void daftarkanKartu(KartuATM* kartu);
-
+        
         bool loginNasabah(const string& nomorKartu, const string& pin);
-
         bool loginAdmin(const string& username, const string& password);
-
         void logout();
 
         bool getStatusLogin() const;
         KartuATM* getKartuAktif() const;
+        bool getStatusAdmin() const;
 };
 
 #endif

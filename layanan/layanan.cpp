@@ -1,6 +1,7 @@
 #include "layanan.h"
 #include "../nasabah/nasabah.h"
 #include "../autentikasi/autentikasi.h"
+#include "../penyimpanan/penyimpanan.h"
 
 #include <iostream>
 #include <string>
@@ -11,7 +12,7 @@ using namespace std;
 
 // constructor class layanan bank 
 LayananBank :: LayananBank(string namaBank)
-    : bank(namaBank), nasabahAktif(nullptr), autentikasi(nullptr) {
+    : bank(namaBank), nasabahAktif(nullptr), autentikasi(nullptr), penyimpanan(nullptr) {
 }
 
 // fungsi registrasi nasabah
@@ -53,6 +54,14 @@ void LayananBank :: registrasiNasabah() {
     );
 
     bank.tambahNasabah(nasabah);
+
+    if (penyimpanan != nullptr) {
+        if (penyimpanan->simpanNasabah(*this)) {
+            cout << "Data nasabah berhasil disimpan.\n";
+        } else {
+            cout << "Gagal menyimpan data nasabah.\n";
+        }
+    }
 }
 
 // fungsi untuk melihat data nasabah
@@ -177,11 +186,18 @@ void LayananBank::buatRekening() {
 
     cout << "\nRekening berhasil dibuat!" << endl;
     ptrRekening->lihatInformasiRekening();
+
+    if (penyimpanan != nullptr) {
+        if (penyimpanan->simpanRekening(*this)) {
+            cout << "Data rekening berhasil disimpan.\n";
+        } else {
+            cout << "Gagal menyimpan data rekening.\n";
+        }
+    }
 }
 
 // fungsi untuk setor 
-
-void LayananBank :: setor() {
+void LayananBank::setor() {
     string nomorRekening;
     string idTransaksi;
     string tanggal;
@@ -217,11 +233,11 @@ void LayananBank :: setor() {
     if (!(cin >> jumlah)) {
         cout << "Jumlah tidak valid." << endl;
         cin.clear();
-        cin.ignore(numeric_limits<streamsize> :: max(), '\n');
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         return;
-    }   
+    }
 
-    cin.ignore(numeric_limits<streamsize> :: max(), '\n');
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
     cout << "Keterangan: ";
     getline(cin, keterangan);
@@ -244,13 +260,23 @@ void LayananBank :: setor() {
 
     daftarTransaksi.push_back(move(transaksi));
 
-    cout << "Saldo terbaru: "
+    if (penyimpanan != nullptr) {
+        bool rekeningTersimpan = penyimpanan->simpanRekening(*this);
+        bool transaksiTersimpan = penyimpanan->simpanTransaksi(*this);
+
+        if (rekeningTersimpan && transaksiTersimpan) {
+            cout << "Data rekening dan transaksi berhasil disimpan." << endl;
+        } else {
+            cout << "Peringatan: gagal menyimpan sebagian data." << endl;
+        }
+    }
+
+    cout << "Saldo terbaru: Rp"
          << rekening->lihatSaldo() << endl;
 }
 
 // fungsi untuk tarik 
-
-void LayananBank :: tarik() {
+void LayananBank::tarik() {
     string nomorRekening;
     string idTransaksi;
     string tanggal;
@@ -286,11 +312,11 @@ void LayananBank :: tarik() {
     if (!(cin >> jumlah)) {
         cout << "Jumlah tidak valid." << endl;
         cin.clear();
-        cin.ignore(numeric_limits<streamsize> :: max(), '\n');
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         return;
     }
 
-    cin.ignore(numeric_limits<streamsize> :: max(), '\n');
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
     cout << "Keterangan: ";
     getline(cin, keterangan);
@@ -313,7 +339,18 @@ void LayananBank :: tarik() {
 
     daftarTransaksi.push_back(move(transaksi));
 
-    cout << "Saldo terbaru: "
+    if (penyimpanan != nullptr) {
+        bool rekeningTersimpan = penyimpanan->simpanRekening(*this);
+        bool transaksiTersimpan = penyimpanan->simpanTransaksi(*this);
+
+        if (rekeningTersimpan && transaksiTersimpan) {
+            cout << "Data rekening dan transaksi berhasil disimpan." << endl;
+        } else {
+            cout << "Peringatan: gagal menyimpan sebagian data." << endl;
+        }
+    }
+
+    cout << "Saldo terbaru: Rp"
          << rekening->lihatSaldo() << endl;
 }
 
@@ -375,7 +412,7 @@ void LayananBank :: transfer() {
     cout << "Tanggal Transaksi: ";
     getline(cin, tanggal);
 
-    cout << "Jumlah Transfer: ";
+    cout << "Jumlah Transfer: Rp";
     if (!(cin >> jumlah)) {
         cout << "Jumlah tidak valid." << endl;
         cin.clear();
@@ -416,17 +453,30 @@ void LayananBank :: transfer() {
 
     transaksi->setRekeningPengirim(rekeningPengirim);
     transaksi->setRekeningPenerima(rekeningPenerima);
-
     transaksi->lihatDetailTransaksi();
 
     daftarTransaksi.push_back(move(transaksi));
 
+    if (penyimpanan != nullptr) {
+        bool rekeningTersimpan = penyimpanan->simpanRekening(*this);
+        bool transaksiTersimpan = penyimpanan->simpanTransaksi(*this);
+
+        if (rekeningTersimpan && transaksiTersimpan) {
+            cout << "Data rekening dan transaksi berhasil disimpan."
+                 << endl;
+        } else {
+            cout << "Peringatan: gagal menyimpan sebagian data."
+                 << endl;
+        }
+    }
+
     cout << "Transfer berhasil." << endl;
-    cout << "Saldo pengirim terbaru: "
+    cout << "Saldo pengirim terbaru: Rp"
          << rekeningPengirim->lihatSaldo() << endl;
-    cout << "Saldo penerima terbaru: "
+    cout << "Saldo penerima terbaru: Rp"
          << rekeningPenerima->lihatSaldo() << endl;
 }
+
 
 // fungsi untuk menutup rekening 
 void LayananBank :: tutupRekening() {
@@ -462,7 +512,6 @@ void LayananBank :: tutupRekening() {
 }
 
 // fungsi untuk mengaktifkan rekening 
-
 void LayananBank::aktifkanRekening() {
     string nomorRekening;
 
@@ -587,7 +636,63 @@ void LayananBank :: buatKartuATM() {
     daftarKartu.push_back(move(kartuBaru));
     autentikasi->daftarkanKartu(ptrKartu);
 
+    if (penyimpanan != nullptr) {
+        penyimpanan->simpanKartu(*this);
+    }
+
     cout << "Kartu ATM berhasil dibuat." << endl;
     cout << "Nomor Kartu: " << ptrKartu->getNomorKartu() << endl;
 }
 
+// getter bank const 
+const Bank& LayananBank :: getBank() const {
+    return bank;
+}
+
+// setter penyimpanan 
+void LayananBank :: setPenyimpanan(PenyimpananBank* penyimpanan) {
+    this->penyimpanan = penyimpanan;
+}
+
+// getter bank 
+Bank& LayananBank::getBank() {
+    return bank;
+}
+
+// getter daftar rekening 
+const vector<unique_ptr<Rekening>>& LayananBank :: getDaftarRekening() const {
+    return daftarRekening;
+}
+
+// getter daftar kartu 
+const vector<unique_ptr<KartuATM>>& LayananBank :: getDaftarKartu() const {
+    return daftarKartu;
+}
+
+const vector<unique_ptr<Transaksi>>&
+LayananBank::getDaftarTransaksi() const {
+    return daftarTransaksi;
+}
+
+void LayananBank :: tambahRekeningTersimpan(
+    unique_ptr<Rekening> rekening
+) {
+    daftarRekening.push_back(move(rekening));
+}
+
+void LayananBank :: tambahKartuTersimpan(
+    unique_ptr<KartuATM> kartu
+) {
+    KartuATM* kartuPtr = kartu.get();
+    daftarKartu.push_back(move(kartu));
+
+    if (autentikasi != nullptr) {
+        autentikasi->daftarkanKartu(kartuPtr);
+    }
+}
+
+void LayananBank :: tambahTransaksiTersimpan(
+    unique_ptr<Transaksi> transaksi
+) {
+    daftarTransaksi.push_back(move(transaksi));
+}

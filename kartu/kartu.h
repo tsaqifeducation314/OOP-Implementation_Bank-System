@@ -35,6 +35,9 @@ public:
     string getNomorKartu() const;
     bool getStatusKartu() const;
     Rekening* getRekening() const;
+    string getTanggalTerbit() const;
+    string getTanggalKadaluarsa() const;
+    string getPIN() const;
 };
 
 #endif

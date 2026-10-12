@@ -5,11 +5,15 @@
 #include "../rekening/rekening.h"
 #include "../transaksi/transaksi.h"
 #include "../kartu/kartu.h"
+#include "../penyimpanan/penyimpanan.h"
+
 #include <memory>
 #include <vector>
 
-// CLASS BANK 
-class Bank; 
+using namespace std;
+
+// CLASS PENYIMPANAN BANK
+class PenyimpananBank;
 
 // CLASS NASABAH 
 class Nasabah;
@@ -29,8 +33,13 @@ class LayananBank {
         
         Autentikasi* autentikasi; 
 
+        PenyimpananBank* penyimpanan;
+
     public: 
         LayananBank(string namaBank);
+
+        Bank& getBank();
+        const Bank& getBank() const;
 
         void registrasiNasabah(); 
         void ubahDataNasabah(); 
@@ -47,6 +56,15 @@ class LayananBank {
         void buatKartuATM(); 
 
         void setAutentikasi(Autentikasi* autentikasi);
+        void setPenyimpanan(PenyimpananBank* penyimpanan);
+        const vector<unique_ptr<Rekening>>& getDaftarRekening() const;
+        const vector<unique_ptr<KartuATM>>& getDaftarKartu() const;
+
+        const vector<unique_ptr<Transaksi>>& getDaftarTransaksi() const;
+
+        void tambahRekeningTersimpan(unique_ptr<Rekening> rekening);
+        void tambahKartuTersimpan(unique_ptr<KartuATM> kartu);
+        void tambahTransaksiTersimpan(unique_ptr<Transaksi> transaksi);
 };
 
 #endif 

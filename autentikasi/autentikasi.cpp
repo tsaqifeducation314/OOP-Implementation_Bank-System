@@ -81,3 +81,7 @@ bool Autentikasi :: getStatusLogin() const {
 KartuATM* Autentikasi :: getKartuAktif() const {
     return kartuAktif;
 }
+
+bool Autentikasi :: getStatusAdmin() const {
+    return adminAktif;
+}

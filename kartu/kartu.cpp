@@ -90,3 +90,15 @@ bool KartuATM :: getStatusKartu() const {
 Rekening* KartuATM :: getRekening() const {
     return rekening;
 }
+
+string KartuATM :: getTanggalTerbit() const {
+    return tanggalTerbit;
+}
+
+string KartuATM :: getTanggalKadaluarsa() const {
+    return tanggalKadaluarsa;
+}
+
+string KartuATM :: getPIN() const {
+    return pin;
+}
