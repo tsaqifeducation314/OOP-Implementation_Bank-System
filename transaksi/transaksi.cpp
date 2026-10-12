@@ -22,7 +22,8 @@ Transaksi :: Transaksi(string id, string tanggal, double nominal, string tipe, s
 
 // fungsi untuk melihat detail transaksi 
 void Transaksi :: lihatDetailTransaksi() {
-    cout << "----- DETAIL TRANSAKSI -----" << endl;
+    cout << endl;
+    cout << "===== DETAIL TRANSAKSI =====" << endl;
     cout << "ID Transaksi     : " << idTransaksi << endl;
     cout << "Tanggal          : " << tanggal << endl;
     cout << "Jenis            : " << jenis << endl;
@@ -55,7 +56,7 @@ void Transaksi :: lihatDetailTransaksi() {
         }
     }
 
-    cout << "-----------------------------" << endl;
+    cout << "------------------------------" << endl;
 }
 
 // setter untuk rekening 

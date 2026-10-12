@@ -19,7 +19,7 @@ void Bank :: tambahNasabah(const Nasabah& nasabah) {
     }
 
     daftarNasabah.push_back(nasabah); 
-    cout << "Nasabah berhasil ditambahkan ke bank " << namaBank << "." << endl;
+    cout << "Nasabah berhasil ditambahkan ke " << namaBank << "." << endl;
 }
 
 // fungsi untuk menghapus nasabah 
@@ -42,11 +42,11 @@ void Bank :: lihatDaftarNasabah() {
         return;
     }
 
-    cout << "----- DAFTAR NASABAH -----" << endl;
+    cout << "===== DAFTAR NASABAH =====" << endl;
     
     for (const Nasabah& nasabah : daftarNasabah) {
         nasabah.lihatInformasiPribadi();
-        cout << "-------------------------" << endl;
+        cout << "------------------------------" << endl;
     }
 }
 

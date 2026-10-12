@@ -86,7 +86,8 @@ void LayananBank :: lihatDataNasabah() {
 void LayananBank :: ubahDataNasabah() {
     string id;
 
-    cout << "\n===== UBAH DATA NASABAH =====" << endl;
+    cout << endl;
+    cout << "===== UBAH DATA NASABAH =====" << endl;
     cout << "Masukkan ID Nasabah: ";
     getline(cin >> ws, id);
 
@@ -108,8 +109,9 @@ void LayananBank::buatRekening() {
     string tanggalDibuka;
     double saldoAwal;
 
-    cout << "\n----- PEMBUKAAN REKENING -----" << endl;
-    cout << "ID Nasabah: ";
+    cout << endl;
+    cout << "===== PEMBUKAAN REKENING =====" << endl;
+    cout << "ID Nasabah : ";
     getline(cin >> ws, idNasabah);
 
     Nasabah* nasabah = bank.cariNasabah(idNasabah);
@@ -197,16 +199,17 @@ void LayananBank::buatRekening() {
 }
 
 // fungsi untuk setor 
-void LayananBank::setor() {
+void LayananBank :: setor() {
     string nomorRekening;
     string idTransaksi;
     string tanggal;
     string keterangan;
     double jumlah;
 
-    cout << "\n----- SETOR TUNAI -----" << endl;
+    cout << endl;
+    cout << "===== SETOR TUNAI =====" << endl;
 
-    cout << "Nomor Rekening: ";
+    cout << "Nomor Rekening    : ";
     getline(cin >> ws, nomorRekening);
 
     Rekening* rekening = nullptr;
@@ -223,13 +226,13 @@ void LayananBank::setor() {
         return;
     }
 
-    cout << "ID Transaksi: ";
+    cout << "ID Transaksi      : ";
     getline(cin, idTransaksi);
 
-    cout << "Tanggal Transaksi: ";
+    cout << "Tanggal Transaksi : ";
     getline(cin, tanggal);
 
-    cout << "Jumlah Setoran: Rp";
+    cout << "Jumlah Setoran    : ";
     if (!(cin >> jumlah)) {
         cout << "Jumlah tidak valid." << endl;
         cin.clear();
@@ -271,7 +274,7 @@ void LayananBank::setor() {
         }
     }
 
-    cout << "Saldo terbaru: Rp"
+    cout << "Saldo terbaru: "
          << rekening->lihatSaldo() << endl;
 }
 
@@ -283,9 +286,10 @@ void LayananBank::tarik() {
     string keterangan;
     double jumlah;
 
-    cout << "\n----- TARIK TUNAI -----" << endl;
+    cout << endl;
+    cout << "===== TARIK TUNAI =====" << endl;
 
-    cout << "Nomor Rekening: ";
+    cout << "Nomor Rekening    : ";
     getline(cin >> ws, nomorRekening);
 
     Rekening* rekening = nullptr;
@@ -302,13 +306,13 @@ void LayananBank::tarik() {
         return;
     }
 
-    cout << "ID Transaksi: ";
+    cout << "ID Transaksi      : ";
     getline(cin, idTransaksi);
 
-    cout << "Tanggal Transaksi: ";
+    cout << "Tanggal Transaksi : ";
     getline(cin, tanggal);
 
-    cout << "Jumlah Penarikan: Rp";
+    cout << "Jumlah Penarikan  : ";
     if (!(cin >> jumlah)) {
         cout << "Jumlah tidak valid." << endl;
         cin.clear();
@@ -318,7 +322,7 @@ void LayananBank::tarik() {
 
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    cout << "Keterangan: ";
+    cout << "Keterangan        : ";
     getline(cin, keterangan);
 
     if (!rekening->tarikDana(jumlah)) {
@@ -350,7 +354,7 @@ void LayananBank::tarik() {
         }
     }
 
-    cout << "Saldo terbaru: Rp"
+    cout << "Saldo terbaru     : "
          << rekening->lihatSaldo() << endl;
 }
 
@@ -364,7 +368,8 @@ void LayananBank :: transfer() {
     string keterangan;
     double jumlah;
 
-    cout << "\n----- TRANSFER -----" << endl;
+    cout << endl;
+    cout << "===== TRANSFER =====" << endl;
 
     cout << "Nomor Rekening Pengirim: ";
     getline(cin >> ws, nomorPengirim);
@@ -406,13 +411,13 @@ void LayananBank :: transfer() {
         return;
     }
 
-    cout << "ID Transaksi: ";
+    cout << "ID Transaksi      : ";
     getline(cin, idTransaksi);
 
-    cout << "Tanggal Transaksi: ";
+    cout << "Tanggal Transaksi : ";
     getline(cin, tanggal);
 
-    cout << "Jumlah Transfer: Rp";
+    cout << "Jumlah Transfer   : ";
     if (!(cin >> jumlah)) {
         cout << "Jumlah tidak valid." << endl;
         cin.clear();
@@ -471,9 +476,9 @@ void LayananBank :: transfer() {
     }
 
     cout << "Transfer berhasil." << endl;
-    cout << "Saldo pengirim terbaru: Rp"
+    cout << "Saldo pengirim terbaru : "
          << rekeningPengirim->lihatSaldo() << endl;
-    cout << "Saldo penerima terbaru: Rp"
+    cout << "Saldo penerima terbaru : "
          << rekeningPenerima->lihatSaldo() << endl;
 }
 
@@ -482,8 +487,9 @@ void LayananBank :: transfer() {
 void LayananBank :: tutupRekening() {
     string nomorRekening;
 
-    cout << "\n----- TUTUP REKENING -----" << endl;
-    cout << "Nomor Rekening: ";
+    cout << endl;
+    cout << "===== TUTUP REKENING =====" << endl;
+    cout << "Nomor Rekening : ";
     getline(cin >> ws, nomorRekening);
 
     Rekening* rekening = nullptr;
@@ -512,11 +518,12 @@ void LayananBank :: tutupRekening() {
 }
 
 // fungsi untuk mengaktifkan rekening 
-void LayananBank::aktifkanRekening() {
+void LayananBank :: aktifkanRekening() {
     string nomorRekening;
 
-    cout << "\n----- AKTIFKAN REKENING -----" << endl;
-    cout << "Nomor Rekening: ";
+    cout << endl;
+    cout << "===== AKTIFKAN REKENING =====" << endl;
+    cout << "Nomor Rekening : ";
     getline(cin >> ws, nomorRekening);
 
     Rekening* rekening = nullptr;
@@ -562,7 +569,8 @@ void LayananBank :: buatKartuATM() {
     string tanggalKadaluarsa;
     string pin;
 
-    cout << "\n----- PEMBUATAN KARTU ATM -----" << endl;
+    cout << endl;
+    cout << "===== PEMBUATAN KARTU ATM =====" << endl;
     cout << "Nomor Rekening: ";
     getline(cin >> ws, nomorRekening);
 
@@ -602,10 +610,10 @@ void LayananBank :: buatKartuATM() {
         }
     }
 
-    cout << "Tanggal Terbit (DD-MM-YYYY): ";
+    cout << "Tanggal Terbit     (DD-MM-YYYY) : ";
     getline(cin, tanggalTerbit);
 
-    cout << "Tanggal Kadaluarsa (DD-MM-YYYY): ";
+    cout << "Tanggal Kadaluarsa (DD-MM-YYYY) : ";
     getline(cin, tanggalKadaluarsa);
 
     cout << "PIN Awal (6 digit): ";
@@ -641,7 +649,7 @@ void LayananBank :: buatKartuATM() {
     }
 
     cout << "Kartu ATM berhasil dibuat." << endl;
-    cout << "Nomor Kartu: " << ptrKartu->getNomorKartu() << endl;
+    cout << "Nomor Kartu : " << ptrKartu->getNomorKartu() << endl;
 }
 
 // getter bank const 
@@ -655,7 +663,7 @@ void LayananBank :: setPenyimpanan(PenyimpananBank* penyimpanan) {
 }
 
 // getter bank 
-Bank& LayananBank::getBank() {
+Bank& LayananBank :: getBank() {
     return bank;
 }
 

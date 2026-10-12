@@ -22,8 +22,9 @@ MenuCLI::MenuCLI(
 }
 
 void MenuCLI::tampilkanMenuUtama() {
-    cout << "\n==================================" << endl;
-    cout << "       SISTEM BANK INDONESIA      " << endl;
+    cout << endl;
+    cout << "==================================" << endl;
+    cout << "      SISTEM BANK BERDIKARI       " << endl;
     cout << "==================================" << endl;
     cout << "1. Login Admin" << endl;
     cout << "2. Login Nasabah" << endl;
@@ -55,12 +56,13 @@ void MenuCLI::menuLogin() {
         case 1: {
             string username;
             string password;
-
-            cout << "\n===== LOGIN ADMIN =====" << endl;
-            cout << "Username: ";
+            
+            cout << endl;
+            cout << "===== LOGIN ADMIN =====" << endl;
+            cout << "Username : ";
             getline(cin, username);
 
-            cout << "Password: ";
+            cout << "Password : ";
             getline(cin, password);
 
             if (autentikasi.loginAdmin(username, password)) {
@@ -75,11 +77,12 @@ void MenuCLI::menuLogin() {
             string nomorKartu;
             string pin;
 
-            cout << "\n===== LOGIN NASABAH =====" << endl;
-            cout << "Nomor Kartu: ";
+            cout << endl;
+            cout << "===== LOGIN NASABAH =====" << endl;
+            cout << "Nomor Kartu : ";
             getline(cin, nomorKartu);
 
-            cout << "PIN: ";
+            cout << "PIN         : ";
             getline(cin, pin);
 
             if (autentikasi.loginNasabah(nomorKartu, pin)) {
@@ -108,8 +111,9 @@ void MenuCLI::menuAdmin() {
     while (sesiAktif &&
            autentikasi.getStatusLogin() &&
            autentikasi.getStatusAdmin()) {
-
-        cout << "\n==================================" << endl;
+        
+        cout << endl;
+        cout << "==================================" << endl;
         cout << "           MENU ADMIN             " << endl;
         cout << "==================================" << endl;
         cout << "1. Nasabah" << endl;
@@ -118,7 +122,7 @@ void MenuCLI::menuAdmin() {
         cout << "4. Transaksi" << endl;
         cout << "5. Simpan Semua Data" << endl;
         cout << "0. Logout" << endl;
-        cout << "Pilihan: ";
+        cout << "Pilihan : ";
 
         if (!(cin >> pilihan)) {
             cout << "Input harus berupa angka." << endl;
@@ -168,14 +172,15 @@ void MenuCLI::menuNasabahAdmin() {
     bool kembali = false;
 
     while (!kembali) {
-        cout << "\n========== MENU NASABAH ==========" << endl;
+        cout << endl;
+        cout << "===== MENU NASABAH =====" << endl;
         cout << "1. Registrasi Nasabah" << endl;
         cout << "2. Lihat Daftar Nasabah" << endl;
         cout << "3. Lihat Data Nasabah" << endl;
         cout << "4. Ubah Data Nasabah" << endl;
         cout << "5. Hapus Nasabah" << endl;
         cout << "0. Kembali" << endl;
-        cout << "Pilihan: ";
+        cout << "Pilihan : ";
 
         if (!(cin >> pilihan)) {
             cout << "Input harus berupa angka." << endl;
@@ -232,13 +237,14 @@ void MenuCLI::menuRekeningAdmin() {
     bool kembali = false;
 
     while (!kembali) {
-        cout << "\n========== MENU REKENING ==========" << endl;
+        cout << endl;
+        cout << "===== MENU REKENING =====" << endl;
         cout << "1. Buat Rekening" << endl;
         cout << "2. Lihat Daftar Rekening" << endl;
         cout << "3. Tutup Rekening" << endl;
         cout << "4. Aktifkan Rekening" << endl;
         cout << "0. Kembali" << endl;
-        cout << "Pilihan: ";
+        cout << "Pilihan : ";
 
         if (!(cin >> pilihan)) {
             cout << "Input harus berupa angka." << endl;
@@ -284,7 +290,8 @@ void MenuCLI::menuRekeningAdmin() {
 void MenuCLI::lihatDaftarRekening() {
     const auto& daftarRekening = layananBank.getDaftarRekening();
 
-    cout << "\n========== DAFTAR REKENING ==========" << endl;
+    cout << endl;
+    cout << "===== DAFTAR REKENING =====" << endl;
 
     if (daftarRekening.empty()) {
         cout << "Belum ada rekening." << endl;
@@ -294,24 +301,24 @@ void MenuCLI::lihatDaftarRekening() {
     for (const auto& rekening : daftarRekening) {
         if (rekening != nullptr) {
             rekening->lihatInformasiRekening();
-            cout << "------------------------------------" << endl;
+            cout << "------------------------------" << endl;
         }
     }
 }
-
 
 void MenuCLI::menuATMAdmin() {
     int pilihan;
     bool kembali = false;
 
     while (!kembali) {
-        cout << "\n============= MENU ATM =============" << endl;
+        cout << endl;
+        cout << "===== MENU ATM =====" << endl;
         cout << "1. Buat Kartu ATM" << endl;
         cout << "2. Lihat Daftar Kartu ATM" << endl;
         cout << "3. Ubah PIN Kartu" << endl;
         cout << "4. Blokir Kartu ATM" << endl;
         cout << "0. Kembali" << endl;
-        cout << "Pilihan: ";
+        cout << "Pilihan : ";
 
         if (!(cin >> pilihan)) {
             cout << "Input harus berupa angka." << endl;
@@ -337,13 +344,13 @@ void MenuCLI::menuATMAdmin() {
                 string pinLama;
                 string pinBaru;
 
-                cout << "Nomor kartu: ";
+                cout << "Nomor kartu : ";
                 getline(cin, nomorKartu);
 
-                cout << "PIN lama: ";
+                cout << "PIN lama    : ";
                 getline(cin, pinLama);
 
-                cout << "PIN baru: ";
+                cout << "PIN baru    : ";
                 getline(cin, pinBaru);
 
                 bool ditemukan = false;
@@ -415,7 +422,8 @@ void MenuCLI::menuATMAdmin() {
 void MenuCLI::lihatDaftarKartu() {
     const auto& daftarKartu = layananBank.getDaftarKartu();
 
-    cout << "\n========== DAFTAR KARTU ATM ==========" << endl;
+    cout << endl;
+    cout << "===== DAFTAR KARTU ATM =====" << endl;
 
     if (daftarKartu.empty()) {
         cout << "Belum ada kartu ATM." << endl;
@@ -427,27 +435,27 @@ void MenuCLI::lihatDaftarKartu() {
             continue;
         }
 
-        cout << "Nomor Kartu       : "
+        cout << "Nomor Kartu         : "
              << kartu->getNomorKartu() << endl;
 
-        cout << "Tanggal Terbit    : "
+        cout << "Tanggal Terbit      : "
              << kartu->getTanggalTerbit() << endl;
 
-        cout << "Tanggal Kedaluwarsa: "
+        cout << "Tanggal Kedaluwarsa : "
              << kartu->getTanggalKadaluarsa() << endl;
 
-        cout << "Status            : "
+        cout << "Status              : "
              << (kartu->getStatusKartu() ? "Aktif" : "Terblokir")
              << endl;
 
         Rekening* rekening = kartu->getRekening();
 
         if (rekening != nullptr) {
-            cout << "Nomor Rekening    : "
+            cout << "Nomor Rekening  : "
                  << rekening->getNomorRekening() << endl;
         }
 
-        cout << "--------------------------------------" << endl;
+        cout << "------------------------------" << endl;
     }
 }
 
@@ -457,13 +465,14 @@ void MenuCLI::menuTransaksiAdmin() {
     bool kembali = false;
 
     while (!kembali) {
-        cout << "\n========== MENU TRANSAKSI ==========" << endl;
+        cout << endl;
+        cout << "===== MENU TRANSAKSI =====" << endl;
         cout << "1. Setor Tunai" << endl;
         cout << "2. Tarik Tunai" << endl;
         cout << "3. Transfer" << endl;
         cout << "4. Lihat Daftar Transaksi" << endl;
         cout << "0. Kembali" << endl;
-        cout << "Pilihan: ";
+        cout << "Pilihan : ";
 
         if (!(cin >> pilihan)) {
             cout << "Input harus berupa angka." << endl;
@@ -490,8 +499,9 @@ void MenuCLI::menuTransaksiAdmin() {
             case 4: {
                 const auto& daftarTransaksi =
                     layananBank.getDaftarTransaksi();
-
-                cout << "\n========== DAFTAR TRANSAKSI ==========" << endl;
+                
+                cout << endl;
+                cout << "===== DAFTAR TRANSAKSI =====" << endl;
 
                 if (daftarTransaksi.empty()) {
                     cout << "Belum ada transaksi." << endl;
@@ -501,7 +511,7 @@ void MenuCLI::menuTransaksiAdmin() {
                 for (const auto& transaksi : daftarTransaksi) {
                     if (transaksi != nullptr) {
                         transaksi->lihatDetailTransaksi();
-                        cout << "--------------------------------------" << endl;
+                        cout << "------------------------------" << endl;
                     }
                 }
 
@@ -547,7 +557,9 @@ void MenuCLI::menuNasabah() {
 
     while (sesiAktif && autentikasi.getStatusLogin()
            && !autentikasi.getStatusAdmin()) {
-        cout << "\n========= MENU NASABAH =========" << endl;
+        
+        cout << endl;
+        cout << "===== MENU NASABAH =====" << endl;
         cout << "Selamat datang, " << nasabah->getNama() << endl;
         cout << "1. Lihat Informasi Pribadi" << endl;
         cout << "2. Lihat Rekening" << endl;
@@ -555,7 +567,7 @@ void MenuCLI::menuNasabah() {
         cout << "4. Ubah PIN ATM" << endl;
         cout << "5. Lihat Riwayat Transaksi" << endl;
         cout << "0. Logout" << endl;
-        cout << "Pilihan: ";
+        cout << "Pilihan : ";
 
         if (!(cin >> pilihan)) {
             cout << "Input harus berupa angka." << endl;
@@ -611,14 +623,15 @@ void MenuCLI::ubahPINNasabah() {
     string pinBaru;
     string konfirmasiPIN;
 
-    cout << "\n========== UBAH PIN ==========" << endl;
-    cout << "PIN lama: ";
+    cout << endl;
+    cout << "===== UBAH PIN =====" << endl;
+    cout << "PIN lama            : ";
     getline(cin, pinLama);
 
-    cout << "PIN baru (6 digit): ";
+    cout << "PIN baru (6 digit)  : ";
     getline(cin, pinBaru);
 
-    cout << "Konfirmasi PIN baru: ";
+    cout << "Konfirmasi PIN baru : ";
     getline(cin, konfirmasiPIN);
 
     if (pinBaru.length() != 6) {
@@ -660,7 +673,8 @@ void MenuCLI::lihatTransaksiNasabah() {
     Rekening* rekening = kartu->getRekening();
     bool ditemukan = false;
 
-    cout << "\n===== RIWAYAT TRANSAKSI =====" << endl;
+    cout << endl;
+    cout << "===== RIWAYAT TRANSAKSI =====" << endl;
 
     for (const auto& transaksi :
          layananBank.getDaftarTransaksi()) {
