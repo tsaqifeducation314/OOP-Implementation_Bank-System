@@ -613,3 +613,35 @@ const vector<unique_ptr<KartuATM>>&
 LayananBank :: getDaftarKartu() const {
     return daftarKartu;
 }
+
+// fungsi untuk menambahkan rekening yang tersimpan
+void LayananBank :: tambahRekeningTersimpan(
+    unique_ptr<Rekening> rekening
+) {
+    daftarRekening.push_back(move(rekening));
+}
+
+// fungsi untuk menambahkan transaksi yang tersimpan 
+void LayananBank :: tambahTransaksiTersimpan(
+    unique_ptr<Transaksi> transaksi
+) {
+    daftarTransaksi.push_back(move(transaksi));
+}
+
+// fungsi untuk menambahkan kartu ATM yang tersimpan 
+void LayananBank :: tambahKartuTersimpan(
+    unique_ptr<KartuATM> kartu
+) {
+    daftarKartu.push_back(move(kartu));
+}
+
+// fungsi untuk menghubungkan autentikasi 
+void LayananBank :: hubungkanAutentikasi() {
+    if (autentikasi == nullptr) {
+        return;
+    }
+
+    for (const auto& kartu : daftarKartu) {
+        autentikasi->daftarkanKartu(kartu.get());
+    }
+}

@@ -52,6 +52,11 @@ class LayananBank {
         const vector<unique_ptr<Rekening>>& getDaftarRekening() const;
         const vector<unique_ptr<Transaksi>>& getDaftarTransaksi() const;
         const vector<unique_ptr<KartuATM>>& getDaftarKartu() const;
+
+        void tambahRekeningTersimpan(unique_ptr<Rekening> rekening);
+        void tambahTransaksiTersimpan(unique_ptr<Transaksi> transaksi);
+        void tambahKartuTersimpan(unique_ptr<KartuATM> kartu);
+        void hubungkanAutentikasi();
 };
 
 #endif 
