@@ -16,7 +16,7 @@ int main() {
     layanan.setPenyimpanan(&penyimpanan);
     layanan.setAutentikasi(&autentikasi);
 
-    cout << "===== SISTEM BANK INDONESIA =====" << endl;
+    cout << "===== BANKING MANAGEMENT SYSTEM =====" << endl;
 
     if (!penyimpanan.muatNasabah(layanan)) {
         cout << "Data nasabah belum tersedia atau gagal dimuat."
