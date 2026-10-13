@@ -13,7 +13,7 @@ using namespace std;
 
 // constructor class layanan bank 
 LayananBank :: LayananBank(string namaBank)
-    : bank(namaBank), nasabahAktif(nullptr), autentikasi(nullptr), penyimpanan(nullptr) {
+    : bank(namaBank), autentikasi(nullptr), penyimpanan(nullptr) {
 }
 
 // fungsi registrasi nasabah

@@ -9,6 +9,7 @@
 
 #include <memory>
 #include <vector>
+#include <ctime>
 
 using namespace std;
 
@@ -25,7 +26,6 @@ class Autentikasi;
 class LayananBank {
     private:
         Bank bank; 
-        Nasabah* nasabahAktif; 
         
         vector<unique_ptr<Rekening>> daftarRekening;
         vector<unique_ptr<Transaksi>> daftarTransaksi;
