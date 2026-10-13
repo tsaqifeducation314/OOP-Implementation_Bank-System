@@ -24,7 +24,8 @@ void LayananBank :: registrasiNasabah() {
     string nomorTelepon;
     string email;
 
-    cout << "\n===== REGISTRASI NASABAH =====" << endl;
+    cout << endl;
+    cout << "===== REGISTRASI NASABAH =====" << endl;
 
     cout << "ID Nasabah       : ";
     getline(cin >> ws, id);
@@ -68,7 +69,8 @@ void LayananBank :: registrasiNasabah() {
 void LayananBank :: lihatDataNasabah() {
     string id;
 
-    cout << "\n===== LIHAT DATA NASABAH =====" << endl;
+    cout << endl;
+    cout << "===== LIHAT DATA NASABAH =====" << endl;
     cout << "Masukkan ID Nasabah: ";
     getline(cin >> ws, id);
 
@@ -102,7 +104,7 @@ void LayananBank :: ubahDataNasabah() {
 }
 
 // fungsi untuk membuat rekening 
-void LayananBank::buatRekening() {
+void LayananBank :: buatRekening() {
     string idNasabah;
     string jenisRekening;
     string nomorRekening;
@@ -126,11 +128,12 @@ void LayananBank::buatRekening() {
         return;
     }
 
-    cout << "\nPilih jenis rekening:" << endl;
+    cout << endl;
+    cout << "Pilih jenis rekening:" << endl;
     cout << "1. Rekening Tabungan" << endl;
     cout << "2. Rekening Giro" << endl;
     cout << "3. Rekening Deposito" << endl;
-    cout << "Pilihan: ";
+    cout << "Pilihan : ";
     getline(cin, jenisRekening);
 
     if (jenisRekening != "1" &&
@@ -140,13 +143,13 @@ void LayananBank::buatRekening() {
         return;
     }
 
-    cout << "Nomor Rekening: ";
+    cout << "Nomor Rekening                 : ";
     getline(cin, nomorRekening);
 
-    cout << "Tanggal Pembukaan (DD-MM-YYYY): ";
+    cout << "Tanggal Pembukaan (DD-MM-YYYY) : ";
     getline(cin, tanggalDibuka);
 
-    cout << "Saldo Awal: ";
+    cout << "Saldo Awal                     : ";
     if (!(cin >> saldoAwal) || saldoAwal < 0) {
         cout << "Saldo awal tidak valid." << endl;
         cin.clear();
@@ -242,7 +245,7 @@ void LayananBank :: setor() {
 
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    cout << "Keterangan: ";
+    cout << "Keterangan        : ";
     getline(cin, keterangan);
 
     if (!rekening->setorDana(jumlah)) {
@@ -274,7 +277,7 @@ void LayananBank :: setor() {
         }
     }
 
-    cout << "Saldo terbaru: "
+    cout << "Saldo terbaru     : "
          << rekening->lihatSaldo() << endl;
 }
 
@@ -371,7 +374,7 @@ void LayananBank :: transfer() {
     cout << endl;
     cout << "===== TRANSFER =====" << endl;
 
-    cout << "Nomor Rekening Pengirim: ";
+    cout << "Nomor Rekening Pengirim : ";
     getline(cin >> ws, nomorPengirim);
 
     Rekening* rekeningPengirim = nullptr;
@@ -388,7 +391,7 @@ void LayananBank :: transfer() {
         return;
     }
 
-    cout << "Nomor Rekening Penerima: ";
+    cout << "Nomor Rekening Penerima : ";
     getline(cin, nomorPenerima);
 
     if (nomorPengirim == nomorPenerima) {
@@ -411,28 +414,28 @@ void LayananBank :: transfer() {
         return;
     }
 
-    cout << "ID Transaksi      : ";
+    cout << "ID Transaksi             : ";
     getline(cin, idTransaksi);
 
-    cout << "Tanggal Transaksi : ";
+    cout << "Tanggal Transaksi        : ";
     getline(cin, tanggal);
 
-    cout << "Jumlah Transfer   : ";
+    cout << "Jumlah Transfer          : ";
     if (!(cin >> jumlah)) {
         cout << "Jumlah tidak valid." << endl;
         cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin.ignore(numeric_limits<streamsize> :: max(), '\n');
         return;
     }
 
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cin.ignore(numeric_limits<streamsize> :: max(), '\n');
 
     if (jumlah <= 0) {
         cout << "Jumlah transfer harus lebih dari nol." << endl;
         return;
     }
 
-    cout << "Keterangan: ";
+    cout << "Keterangan               : ";
     getline(cin, keterangan);
 
     if (!rekeningPengirim->tarikDana(jumlah)) {
@@ -476,9 +479,9 @@ void LayananBank :: transfer() {
     }
 
     cout << "Transfer berhasil." << endl;
-    cout << "Saldo pengirim terbaru : "
+    cout << "Saldo pengirim terbaru   : "
          << rekeningPengirim->lihatSaldo() << endl;
-    cout << "Saldo penerima terbaru : "
+    cout << "Saldo penerima terbaru   : "
          << rekeningPenerima->lihatSaldo() << endl;
 }
 
@@ -571,7 +574,7 @@ void LayananBank :: buatKartuATM() {
 
     cout << endl;
     cout << "===== PEMBUATAN KARTU ATM =====" << endl;
-    cout << "Nomor Rekening: ";
+    cout << "Nomor Rekening     : ";
     getline(cin >> ws, nomorRekening);
 
     Rekening* rekening = nullptr;
@@ -600,7 +603,7 @@ void LayananBank :: buatKartuATM() {
         }
     }
 
-    cout << "Nomor Kartu: ";
+    cout << "Nomor Kartu                     : ";
     getline(cin, nomorKartu);
 
     for (const auto& kartu : daftarKartu) {
@@ -610,13 +613,13 @@ void LayananBank :: buatKartuATM() {
         }
     }
 
-    cout << "Tanggal Terbit     (DD-MM-YYYY) : ";
+    cout << "Tanggal Terbit     : ";
     getline(cin, tanggalTerbit);
 
-    cout << "Tanggal Kadaluarsa (DD-MM-YYYY) : ";
+    cout << "Tanggal Kadaluarsa : ";
     getline(cin, tanggalKadaluarsa);
 
-    cout << "PIN Awal (6 digit): ";
+    cout << "PIN Awal (6 digit) : ";
     getline(cin, pin);
 
     if (pin.length() != 6) {
@@ -649,7 +652,7 @@ void LayananBank :: buatKartuATM() {
     }
 
     cout << "Kartu ATM berhasil dibuat." << endl;
-    cout << "Nomor Kartu : " << ptrKartu->getNomorKartu() << endl;
+    cout << "Nomor Kartu        : " << ptrKartu->getNomorKartu() << endl;
 }
 
 // getter bank const 

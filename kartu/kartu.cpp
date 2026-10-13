@@ -71,7 +71,7 @@ bool KartuATM :: ubahPIN(const string& pinLama, const string& pinBaru) {
 }
 
 // fungsi untuk memblokir kartu
-void KartuATM::blokirKartu() {
+void KartuATM :: blokirKartu() {
     status = false;
     cout << "Kartu ATM telah diblokir." << endl;
 }
@@ -91,14 +91,17 @@ Rekening* KartuATM :: getRekening() const {
     return rekening;
 }
 
+// getter tanggal terbit kartu ATM 
 string KartuATM :: getTanggalTerbit() const {
     return tanggalTerbit;
 }
 
+// getter tanggal kadaluarsa kartu ATM 
 string KartuATM :: getTanggalKadaluarsa() const {
     return tanggalKadaluarsa;
 }
 
+// getter pin kartu ATM 
 string KartuATM :: getPIN() const {
     return pin;
 }

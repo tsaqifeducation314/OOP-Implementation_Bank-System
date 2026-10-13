@@ -1,1 +1,3 @@
 idTransaksi,tanggal,jumlah,jenis,status,keterangan,nomorRekening,nomorPengirim,nomorPenerima
+T001,13-10-2026,1000,1,Berhasil,Menabung,12345678,,
+T001,13-10-2026,5000,2,Berhasil,Jajan Siomay,22345678,,

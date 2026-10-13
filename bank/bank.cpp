@@ -42,6 +42,7 @@ void Bank :: lihatDaftarNasabah() {
         return;
     }
 
+    cout << endl;
     cout << "===== DAFTAR NASABAH =====" << endl;
     
     for (const Nasabah& nasabah : daftarNasabah) {

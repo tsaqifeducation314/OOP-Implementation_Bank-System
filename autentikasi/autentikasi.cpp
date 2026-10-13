@@ -82,6 +82,7 @@ KartuATM* Autentikasi :: getKartuAktif() const {
     return kartuAktif;
 }
 
+// getter status admin
 bool Autentikasi :: getStatusAdmin() const {
     return adminAktif;
 }

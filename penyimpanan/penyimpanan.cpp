@@ -14,11 +14,13 @@
 
 using namespace std;
 
-PenyimpananBank::PenyimpananBank(const string& folder)
+// constructor class penyimpanan bank
+PenyimpananBank :: PenyimpananBank(const string& folder)
     : folderData(folder) {
 }
 
-bool PenyimpananBank::simpanNasabah(const LayananBank& layanan) {
+// fungsi untuk menyimpan data nasabah
+bool PenyimpananBank :: simpanNasabah(const LayananBank& layanan) {
     ofstream file(folderData + "/nasabah.csv");
 
     if (!file.is_open()) {
@@ -40,7 +42,8 @@ bool PenyimpananBank::simpanNasabah(const LayananBank& layanan) {
     return file.good();
 }
 
-bool PenyimpananBank::simpanRekening(const LayananBank& layanan) {
+// fungsi untuk menyimpan data rekening 
+bool PenyimpananBank :: simpanRekening(const LayananBank& layanan) {
     ofstream file(folderData + "/rekening.csv");
 
     if (!file.is_open()) {
@@ -77,7 +80,8 @@ bool PenyimpananBank::simpanRekening(const LayananBank& layanan) {
     return file.good();
 }
 
-bool PenyimpananBank::simpanKartu(const LayananBank& layanan) {
+// fungsi untuk menyimpan data kartu ATM
+bool PenyimpananBank :: simpanKartu(const LayananBank& layanan) {
     ofstream file(folderData + "/kartu.csv");
 
     if (!file.is_open()) {
@@ -107,7 +111,8 @@ bool PenyimpananBank::simpanKartu(const LayananBank& layanan) {
     return file.good();
 }
 
-bool PenyimpananBank::simpanTransaksi(const LayananBank& layanan) {
+// fungsi untuk menyimpan data transaksi 
+bool PenyimpananBank :: simpanTransaksi(const LayananBank& layanan) {
     ofstream file(folderData + "/transaksi.csv");
 
     if (!file.is_open()) {
@@ -151,7 +156,8 @@ bool PenyimpananBank::simpanTransaksi(const LayananBank& layanan) {
     return file.good();
 }
 
-bool PenyimpananBank::muatNasabah(LayananBank& layanan) {
+// fungsi untuk memuat data nasabah
+bool PenyimpananBank :: muatNasabah(LayananBank& layanan) {
     ifstream file(folderData + "/nasabah.csv");
 
     if (!file.is_open()) {
@@ -197,7 +203,8 @@ bool PenyimpananBank::muatNasabah(LayananBank& layanan) {
     return !file.bad();
 }
 
-bool PenyimpananBank::muatRekening(LayananBank& layanan) {
+// fungsi untuk memuat data rekening 
+bool PenyimpananBank :: muatRekening(LayananBank& layanan) {
     ifstream file(folderData + "/rekening.csv");
 
     if (!file.is_open()) {
@@ -277,7 +284,8 @@ bool PenyimpananBank::muatRekening(LayananBank& layanan) {
     return !file.bad();
 }
 
-bool PenyimpananBank::muatKartu(LayananBank& layanan) {
+// fungsi untuk memuat data kartu ATM
+bool PenyimpananBank :: muatKartu(LayananBank& layanan) {
     ifstream file(folderData + "/kartu.csv");
 
     if (!file.is_open()) {
@@ -342,7 +350,8 @@ bool PenyimpananBank::muatKartu(LayananBank& layanan) {
     return !file.bad();
 }
 
-bool PenyimpananBank::muatTransaksi(LayananBank& layanan) {
+// fungsi untuk memuat data transaksi
+bool PenyimpananBank :: muatTransaksi(LayananBank& layanan) {
     ifstream file(folderData + "/transaksi.csv");
 
     if (!file.is_open()) {
@@ -420,7 +429,8 @@ bool PenyimpananBank::muatTransaksi(LayananBank& layanan) {
     return !file.bad();
 }
 
-bool PenyimpananBank::simpanSemuaData(const LayananBank& layanan) {
+// fungsi untuk menyimpan semua data 
+bool PenyimpananBank :: simpanSemuaData(const LayananBank& layanan) {
     bool nasabah = simpanNasabah(layanan);
     bool rekening = simpanRekening(layanan);
     bool kartu = simpanKartu(layanan);

@@ -11,7 +11,8 @@
 
 using namespace std;
 
-MenuCLI::MenuCLI(
+// constructor class menu CLI
+MenuCLI :: MenuCLI(
     LayananBank& layananBank,
     Autentikasi& autentikasi,
     PenyimpananBank& penyimpanan
@@ -21,23 +22,26 @@ MenuCLI::MenuCLI(
     running(true) {
 }
 
-void MenuCLI::tampilkanMenuUtama() {
+// fungsi untuk menampilkan menu utama 
+void MenuCLI :: tampilkanMenuUtama() {
     cout << endl;
     cout << "==================================" << endl;
-    cout << "      SISTEM BANK BERDIKARI       " << endl;
+    cout << "            MENU UTAMA            " << endl;
     cout << "==================================" << endl;
     cout << "1. Login Admin" << endl;
     cout << "2. Login Nasabah" << endl;
     cout << "0. Keluar" << endl;
-    cout << "Pilihan: ";
+    cout << "Pilihan : ";
 }
 
+// fungsi untuk menjalankan program
 void MenuCLI::jalankan() {
     while (running) {
         menuLogin();
     }
 }
 
+// fungsi untuk menampilkan halaman login
 void MenuCLI::menuLogin() {
     int pilihan;
 
@@ -46,11 +50,11 @@ void MenuCLI::menuLogin() {
     if (!(cin >> pilihan)) {
         cout << "Input harus berupa angka." << endl;
         cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin.ignore(numeric_limits<streamsize> :: max(), '\n');
         return;
     }
 
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cin.ignore(numeric_limits<streamsize> :: max(), '\n');
 
     switch (pilihan) {
         case 1: {
@@ -103,8 +107,9 @@ void MenuCLI::menuLogin() {
             cout << "Pilihan tidak tersedia." << endl;
     }
 }
-    
-void MenuCLI::menuAdmin() {
+
+// fungsi untuk menampilkan menu admin
+void MenuCLI :: menuAdmin() {
     int pilihan;
     bool sesiAktif = true;
 
@@ -166,8 +171,8 @@ void MenuCLI::menuAdmin() {
     }
 }
 
-
-void MenuCLI::menuNasabahAdmin() {
+// fungsi untuk menampilkan menu dengan kategori nasabah pada admin 
+void MenuCLI :: menuNasabahAdmin() {
     int pilihan;
     bool kembali = false;
 
@@ -185,11 +190,11 @@ void MenuCLI::menuNasabahAdmin() {
         if (!(cin >> pilihan)) {
             cout << "Input harus berupa angka." << endl;
             cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cin.ignore(numeric_limits<streamsize> :: max(), '\n');
             continue;
         }
 
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin.ignore(numeric_limits<streamsize> :: max(), '\n');
 
         switch (pilihan) {
             case 1:
@@ -231,8 +236,8 @@ void MenuCLI::menuNasabahAdmin() {
     }
 }
 
-
-void MenuCLI::menuRekeningAdmin() {
+// fungsi untuk menampilkan menu dengan kategori rekening pada admin 
+void MenuCLI :: menuRekeningAdmin() {
     int pilihan;
     bool kembali = false;
 
@@ -249,11 +254,11 @@ void MenuCLI::menuRekeningAdmin() {
         if (!(cin >> pilihan)) {
             cout << "Input harus berupa angka." << endl;
             cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cin.ignore(numeric_limits<streamsize> :: max(), '\n');
             continue;
         }
 
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin.ignore(numeric_limits<streamsize> :: max(), '\n');
 
         switch (pilihan) {
             case 1:
@@ -286,8 +291,8 @@ void MenuCLI::menuRekeningAdmin() {
     }
 }
 
-
-void MenuCLI::lihatDaftarRekening() {
+// fungsi untuk menampilkan daftar rekening 
+void MenuCLI :: lihatDaftarRekening() {
     const auto& daftarRekening = layananBank.getDaftarRekening();
 
     cout << endl;
@@ -306,7 +311,8 @@ void MenuCLI::lihatDaftarRekening() {
     }
 }
 
-void MenuCLI::menuATMAdmin() {
+// fungsi untuk menampilkan menu dengan kategori ATM pada admin 
+void MenuCLI :: menuATMAdmin() {
     int pilihan;
     bool kembali = false;
 
@@ -418,8 +424,8 @@ void MenuCLI::menuATMAdmin() {
     }
 }
 
-
-void MenuCLI::lihatDaftarKartu() {
+// fungsi untuk menampilkan daftar kartu ATM 
+void MenuCLI :: lihatDaftarKartu() {
     const auto& daftarKartu = layananBank.getDaftarKartu();
 
     cout << endl;
@@ -459,8 +465,8 @@ void MenuCLI::lihatDaftarKartu() {
     }
 }
 
-
-void MenuCLI::menuTransaksiAdmin() {
+// fungsi untuk menampilkan menu dengan kategori transaksi pada admin 
+void MenuCLI :: menuTransaksiAdmin() {
     int pilihan;
     bool kembali = false;
 
@@ -511,7 +517,6 @@ void MenuCLI::menuTransaksiAdmin() {
                 for (const auto& transaksi : daftarTransaksi) {
                     if (transaksi != nullptr) {
                         transaksi->lihatDetailTransaksi();
-                        cout << "------------------------------" << endl;
                     }
                 }
 
@@ -528,7 +533,8 @@ void MenuCLI::menuTransaksiAdmin() {
     }
 }
 
-void MenuCLI::menuNasabah() {
+// fungsi untuk menampilkan menu nasabah
+void MenuCLI :: menuNasabah() {
     KartuATM* kartu = autentikasi.getKartuAktif();
 
     if (kartu == nullptr || !kartu->getStatusKartu()) {
@@ -611,7 +617,8 @@ void MenuCLI::menuNasabah() {
     }
 }
 
-void MenuCLI::ubahPINNasabah() {
+// fungsi untuk mengubah PIN
+void MenuCLI :: ubahPINNasabah() {
     KartuATM* kartu = autentikasi.getKartuAktif();
 
     if (kartu == nullptr) {
@@ -662,7 +669,8 @@ void MenuCLI::ubahPINNasabah() {
     }
 }
 
-void MenuCLI::lihatTransaksiNasabah() {
+// fungsi untuk melihat transaksi nasabah
+void MenuCLI :: lihatTransaksiNasabah() {
     KartuATM* kartu = autentikasi.getKartuAktif();
 
     if (kartu == nullptr || kartu->getRekening() == nullptr) {
@@ -694,7 +702,8 @@ void MenuCLI::lihatTransaksiNasabah() {
     }
 }
 
-void MenuCLI::simpanSemuaData() {
+// fungsi untuk menyimpan semua data
+void MenuCLI :: simpanSemuaData() {
     bool nasabahTersimpan = penyimpanan.simpanNasabah(layananBank);
     bool rekeningTersimpan = penyimpanan.simpanRekening(layananBank);
     bool kartuTersimpan = penyimpanan.simpanKartu(layananBank);
