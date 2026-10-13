@@ -25,6 +25,8 @@ private:
     void menuATMAdmin();
     void menuTransaksiAdmin();
 
+    void menuTransaksiNasabah();
+
     void lihatDaftarRekening();
     void lihatDaftarKartu();
     void ubahPINNasabah();

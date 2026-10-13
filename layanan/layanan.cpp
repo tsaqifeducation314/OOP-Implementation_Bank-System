@@ -7,6 +7,7 @@
 #include <string>
 #include <limits>
 #include <memory>
+#include <ctime>
 
 using namespace std;
 
@@ -27,11 +28,21 @@ void LayananBank :: registrasiNasabah() {
     cout << endl;
     cout << "===== REGISTRASI NASABAH =====" << endl;
 
-    cout << "ID Nasabah       : ";
-    getline(cin >> ws, id);
+    int nomor = 1;
+
+    do {
+        id = "NS";
+        if (nomor < 10) {
+            id += "00";
+        } else if (nomor < 100) {
+            id += "0";
+        }
+        id += to_string(nomor);
+        nomor++;
+    } while (bank.cariNasabah(id) != nullptr);
 
     cout << "Nama             : ";
-    getline(cin, nama);
+    getline(cin >> ws, nama);
 
     cout << "Tanggal Lahir    : ";
     getline(cin, tanggalLahir);
@@ -56,11 +67,22 @@ void LayananBank :: registrasiNasabah() {
 
     bank.tambahNasabah(nasabah);
 
+    Nasabah* nasabahTerdaftar = bank.cariNasabah(id);
+
+    if (nasabahTerdaftar == nullptr) {
+        cout << "Registrasi nasabah gagal." << endl;
+        return;
+    }
+
+    cout << endl;
+    cout << "Nasabah berhasil ditambahkan." << endl;
+    cout << "ID Nasabah       : " << id << endl;
+
     if (penyimpanan != nullptr) {
         if (penyimpanan->simpanNasabah(*this)) {
-            cout << "Data nasabah berhasil disimpan.\n";
+            cout << "Data nasabah berhasil disimpan." << endl;
         } else {
-            cout << "Gagal menyimpan data nasabah.\n";
+            cout << "Gagal menyimpan data nasabah." << endl;
         }
     }
 }
@@ -90,7 +112,7 @@ void LayananBank :: ubahDataNasabah() {
 
     cout << endl;
     cout << "===== UBAH DATA NASABAH =====" << endl;
-    cout << "Masukkan ID Nasabah: ";
+    cout << "Masukkan ID Nasabah : ";
     getline(cin >> ws, id);
 
     Nasabah* nasabah = bank.cariNasabah(id);
@@ -143,9 +165,27 @@ void LayananBank :: buatRekening() {
         return;
     }
 
-    cout << "Nomor Rekening                 : ";
-    getline(cin, nomorRekening);
+    int nomor = 1;
+    bool ditemukan;
 
+    do {
+        ditemukan = false;
+        nomorRekening = to_string(1023456788LL + nomor);
+
+        for (const auto& rekening : daftarRekening) {
+            if (rekening != nullptr &&
+                rekening->getNomorRekening() == nomorRekening) {
+                ditemukan = true;
+                break;
+            }
+        }
+
+        nomor++;
+    } while (ditemukan);
+
+    cout << "Nomor Rekening                 : "
+        << nomorRekening << endl;
+    
     cout << "Tanggal Pembukaan (DD-MM-YYYY) : ";
     getline(cin, tanggalDibuka);
 
@@ -603,8 +643,24 @@ void LayananBank :: buatKartuATM() {
         }
     }
 
-    cout << "Nomor Kartu                     : ";
-    getline(cin, nomorKartu);
+    unsigned long long nomor = 5274810362951841ULL;
+    bool ditemukan;
+
+    do {
+        ditemukan = false;
+        nomorKartu = to_string(nomor);
+
+        for (const auto& kartu : daftarKartu) {
+            if (kartu->getNomorKartu() == nomorKartu) {
+                ditemukan = true;
+                nomor++;
+                break;
+            }
+        }
+    } while (ditemukan);
+
+    cout << "Nomor Kartu        : "
+        << nomorKartu << endl;
 
     for (const auto& kartu : daftarKartu) {
         if (kartu->getNomorKartu() == nomorKartu) {
@@ -680,17 +736,20 @@ const vector<unique_ptr<KartuATM>>& LayananBank :: getDaftarKartu() const {
     return daftarKartu;
 }
 
+// getter daftar transaksi
 const vector<unique_ptr<Transaksi>>&
 LayananBank::getDaftarTransaksi() const {
     return daftarTransaksi;
 }
 
+// fungsi untuk menambahkan data rekening tersimpan 
 void LayananBank :: tambahRekeningTersimpan(
     unique_ptr<Rekening> rekening
 ) {
     daftarRekening.push_back(move(rekening));
 }
 
+// fungsi untuk menambahkan data kartu ATM tersimpan
 void LayananBank :: tambahKartuTersimpan(
     unique_ptr<KartuATM> kartu
 ) {
@@ -702,8 +761,227 @@ void LayananBank :: tambahKartuTersimpan(
     }
 }
 
+// fungsi untuk menambahkan data transaksi tersimpan 
 void LayananBank :: tambahTransaksiTersimpan(
     unique_ptr<Transaksi> transaksi
 ) {
     daftarTransaksi.push_back(move(transaksi));
+}
+
+// fungsi untuk setor dana 
+void LayananBank :: setorNasabah(Rekening* rekening) {
+    double jumlah;
+
+    cout << endl;
+    cout << "===== SETOR TUNAI =====" << endl;
+
+    if (rekening == nullptr || !rekening->getStatusRekening()) {
+        cout << "Rekening tidak tersedia atau tidak aktif." << endl;
+        return;
+    }
+
+    cout << "Jumlah Setoran : ";
+    if (!(cin >> jumlah)) {
+        cout << "Jumlah tidak valid." << endl;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        return;
+    }
+
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    if (jumlah <= 0) {
+        cout << "Jumlah setoran harus lebih dari nol." << endl;
+        return;
+    }
+
+    if (!rekening->setorDana(jumlah)) {
+        return;
+    }
+
+    time_t waktuSekarang = time(nullptr);
+    tm* waktuLokal = localtime(&waktuSekarang);
+    char tanggal[11];
+    strftime(tanggal, sizeof(tanggal), "%d-%m-%Y", waktuLokal);
+
+    string idTransaksi =
+        "TRX" + to_string(waktuSekarang) + "-" +
+        to_string(daftarTransaksi.size() + 1);
+
+    auto transaksi = make_unique<Transaksi>(
+        idTransaksi,
+        tanggal,
+        jumlah,
+        "1",
+        "Berhasil",
+        "Setor tunai melalui menu nasabah"
+    );
+
+    transaksi->setRekening(rekening);
+    daftarTransaksi.push_back(move(transaksi));
+
+    if (penyimpanan != nullptr) {
+        penyimpanan->simpanRekening(*this);
+        penyimpanan->simpanTransaksi(*this);
+    }
+
+    cout << "Setor tunai berhasil." << endl;
+    cout << "Saldo terbaru  : " << rekening->lihatSaldo() << endl;
+}
+
+// fungsi untuk tarik dana 
+void LayananBank::tarikNasabah(Rekening* rekening) {
+    double jumlah;
+
+    cout << endl;
+    cout << "===== TARIK TUNAI =====" << endl;
+
+    if (rekening == nullptr || !rekening->getStatusRekening()) {
+        cout << "Rekening tidak tersedia atau tidak aktif." << endl;
+        return;
+    }
+
+    cout << "Jumlah Penarikan : ";
+    if (!(cin >> jumlah)) {
+        cout << "Jumlah tidak valid." << endl;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        return;
+    }
+
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    if (jumlah <= 0) {
+        cout << "Jumlah penarikan harus lebih dari nol." << endl;
+        return;
+    }
+
+    if (!rekening->tarikDana(jumlah)) {
+        return;
+    }
+
+    time_t waktuSekarang = time(nullptr);
+    tm* waktuLokal = localtime(&waktuSekarang);
+    char tanggal[11];
+    strftime(tanggal, sizeof(tanggal), "%d-%m-%Y", waktuLokal);
+
+    string idTransaksi =
+        "TRX" + to_string(waktuSekarang) + "-" +
+        to_string(daftarTransaksi.size() + 1);
+
+    auto transaksi = make_unique<Transaksi>(
+        idTransaksi,
+        tanggal,
+        jumlah,
+        "2",
+        "Berhasil",
+        "Tarik tunai melalui menu nasabah"
+    );
+
+    transaksi->setRekening(rekening);
+    daftarTransaksi.push_back(move(transaksi));
+
+    if (penyimpanan != nullptr) {
+        penyimpanan->simpanRekening(*this);
+        penyimpanan->simpanTransaksi(*this);
+    }
+
+    cout << "Tarik tunai berhasil." << endl;
+    cout << "Saldo terbaru    : " << rekening->lihatSaldo() << endl;
+}
+
+// fungsi untuk transfer 
+void LayananBank::transferNasabah(Rekening* rekening) {
+    string nomorTujuan;
+    double jumlah;
+
+    cout << endl;
+    cout << "===== TRANSFER =====" << endl;
+
+    if (rekening == nullptr || !rekening->getStatusRekening()) {
+        cout << "Rekening pengirim tidak tersedia atau tidak aktif."
+             << endl;
+        return;
+    }
+
+    cout << "Nomor Rekening Tujuan : ";
+    getline(cin >> ws, nomorTujuan);
+
+    if (nomorTujuan == rekening->getNomorRekening()) {
+        cout << "Tidak dapat transfer ke rekening sendiri." << endl;
+        return;
+    }
+
+    Rekening* rekeningTujuan = nullptr;
+
+    for (const auto& data : daftarRekening) {
+        if (data != nullptr &&
+            data->getNomorRekening() == nomorTujuan) {
+            rekeningTujuan = data.get();
+            break;
+        }
+    }
+
+    if (rekeningTujuan == nullptr ||
+        !rekeningTujuan->getStatusRekening()) {
+        cout << "Rekening tujuan tidak ditemukan atau tidak aktif."
+             << endl;
+        return;
+    }
+
+    cout << "Jumlah Transfer       : ";
+    if (!(cin >> jumlah)) {
+        cout << "Jumlah tidak valid." << endl;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        return;
+    }
+
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    if (jumlah <= 0) {
+        cout << "Jumlah transfer harus lebih dari nol." << endl;
+        return;
+    }
+
+    if (!rekening->tarikDana(jumlah)) {
+        cout << "Transfer dibatalkan." << endl;
+        return;
+    }
+
+    if (!rekeningTujuan->setorDana(jumlah)) {
+        rekening->setorDana(jumlah);
+        cout << "Transfer gagal. Dana dikembalikan." << endl;
+        return;
+    }
+
+    time_t waktuSekarang = time(nullptr);
+    tm* waktuLokal = localtime(&waktuSekarang);
+    char tanggal[11];
+    strftime(tanggal, sizeof(tanggal), "%d-%m-%Y", waktuLokal);
+
+    string idTransaksi =
+        "TRX" + to_string(waktuSekarang) + "-" +
+        to_string(daftarTransaksi.size() + 1);
+
+    auto transaksi = make_unique<Transaksi>(
+        idTransaksi,
+        tanggal,
+        jumlah,
+        "3",
+        "Berhasil",
+        "Transfer melalui menu nasabah"
+    );
+
+    transaksi->setRekeningPengirim(rekening);
+    transaksi->setRekeningPenerima(rekeningTujuan);
+    daftarTransaksi.push_back(move(transaksi));
+
+    if (penyimpanan != nullptr) {
+        penyimpanan->simpanRekening(*this);
+        penyimpanan->simpanTransaksi(*this);
+    }
+
+    cout << "Transfer berhasil." << endl;
+    cout << "Saldo pengirim        : " << rekening->lihatSaldo() << endl;
 }

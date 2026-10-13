@@ -36,13 +36,13 @@ void Nasabah :: lihatRekening() {
 
 // fungsi untuk memperbarui informasi pribadi nasabah 
 void Nasabah :: perbaruiInformasiPribadi() {
-    cout << "Alamat baru     : "; 
+    cout << "Alamat baru         : "; 
     getline(cin >> ws, alamat); 
 
-    cout << "No telepon baru : "; 
+    cout << "No telepon baru     : "; 
     getline(cin, nomorTelepon); 
 
-    cout << "Email baru      : "; 
+    cout << "Email baru          : "; 
     getline(cin, email); 
 
 }

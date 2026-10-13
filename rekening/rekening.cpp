@@ -20,7 +20,7 @@ double Rekening :: lihatSaldo() {
 
 // fungsi untuk melihat informasi rekening 
 void Rekening :: lihatInformasiRekening() {
-    cout << "Nama            : " << nama << endl;
+    cout << "ID              : " << nama << endl;
     cout << "Nomor Rekening  : " << nomorRekening << endl;
     cout << "Tanggal Dibuka  : " << tanggalDibuka << endl;
     cout << "Status Rekening : ";

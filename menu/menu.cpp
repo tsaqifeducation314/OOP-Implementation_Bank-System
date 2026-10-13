@@ -457,7 +457,7 @@ void MenuCLI :: lihatDaftarKartu() {
         Rekening* rekening = kartu->getRekening();
 
         if (rekening != nullptr) {
-            cout << "Nomor Rekening  : "
+            cout << "Nomor Rekening      : "
                  << rekening->getNomorRekening() << endl;
         }
 
@@ -473,10 +473,7 @@ void MenuCLI :: menuTransaksiAdmin() {
     while (!kembali) {
         cout << endl;
         cout << "===== MENU TRANSAKSI =====" << endl;
-        cout << "1. Setor Tunai" << endl;
-        cout << "2. Tarik Tunai" << endl;
-        cout << "3. Transfer" << endl;
-        cout << "4. Lihat Daftar Transaksi" << endl;
+        cout << "1. Lihat Daftar Transaksi" << endl;
         cout << "0. Kembali" << endl;
         cout << "Pilihan : ";
 
@@ -490,22 +487,10 @@ void MenuCLI :: menuTransaksiAdmin() {
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         switch (pilihan) {
-            case 1:
-                layananBank.setor();
-                break;
-
-            case 2:
-                layananBank.tarik();
-                break;
-
-            case 3:
-                layananBank.transfer();
-                break;
-
-            case 4: {
+            case 1: {
                 const auto& daftarTransaksi =
                     layananBank.getDaftarTransaksi();
-                
+
                 cout << endl;
                 cout << "===== DAFTAR TRANSAKSI =====" << endl;
 
@@ -571,7 +556,7 @@ void MenuCLI :: menuNasabah() {
         cout << "2. Lihat Rekening" << endl;
         cout << "3. Perbarui Informasi Pribadi" << endl;
         cout << "4. Ubah PIN ATM" << endl;
-        cout << "5. Lihat Riwayat Transaksi" << endl;
+        cout << "5. Transaksi" << endl;
         cout << "0. Logout" << endl;
         cout << "Pilihan : ";
 
@@ -603,12 +588,69 @@ void MenuCLI :: menuNasabah() {
                 break;
 
             case 5:
-                lihatTransaksiNasabah();
+                menuTransaksiNasabah();
                 break;
 
             case 0:
                 sesiAktif = false;
                 cout << "Logout nasabah berhasil." << endl;
+                break;
+
+            default:
+                cout << "Pilihan tidak tersedia." << endl;
+        }
+    }
+}
+
+// fungsi untuk menampilkan menu dengan kategori transaksi pada nasabah
+void MenuCLI :: menuTransaksiNasabah() {
+    int pilihan;
+    bool kembali = false;
+
+    while (!kembali) {
+        cout << endl;
+        cout << "========== MENU TRANSAKSI ==========" << endl;
+        cout << "1. Transfer" << endl;
+        cout << "2. Setor Tunai" << endl;
+        cout << "3. Tarik Tunai" << endl;
+        cout << "4. Lihat Riwayat Transaksi" << endl;
+        cout << "0. Kembali" << endl;
+        cout << "Pilihan : ";
+
+        if (!(cin >> pilihan)) {
+            cout << "Input harus berupa angka." << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            continue;
+        }
+
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        switch (pilihan) {
+            case 1:
+                layananBank.transferNasabah(
+                    autentikasi.getKartuAktif()->getRekening()
+                );
+                break;
+
+            case 2:
+                layananBank.setorNasabah(
+                    autentikasi.getKartuAktif()->getRekening()
+                );
+                break;
+
+            case 3:
+                layananBank.tarikNasabah(
+                    autentikasi.getKartuAktif()->getRekening()
+                );
+                break;
+
+            case 4:
+                lihatTransaksiNasabah();
+                break;
+
+            case 0:
+                kembali = true;
                 break;
 
             default:

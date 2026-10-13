@@ -53,6 +53,10 @@ class LayananBank {
         void tarik();
         void transfer(); 
 
+        void setorNasabah(Rekening* rekening);
+        void tarikNasabah(Rekening* rekening);
+        void transferNasabah(Rekening* rekening);
+
         void buatKartuATM(); 
 
         void setAutentikasi(Autentikasi* autentikasi);
