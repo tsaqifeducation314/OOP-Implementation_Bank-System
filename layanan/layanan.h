@@ -49,10 +49,6 @@ class LayananBank {
         void tutupRekening(); 
         void aktifkanRekening(); 
 
-        void setor(); 
-        void tarik();
-        void transfer(); 
-
         void setorNasabah(Rekening* rekening);
         void tarikNasabah(Rekening* rekening);
         void transferNasabah(Rekening* rekening);

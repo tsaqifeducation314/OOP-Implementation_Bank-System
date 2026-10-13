@@ -11,7 +11,6 @@ class Rekening {
 
         double lihatSaldo();
         virtual void lihatInformasiRekening();
-        void ubahStatus();
         virtual double hitungBunga();
 
         virtual ~Rekening() {};
@@ -72,7 +71,6 @@ class RekeningDeposito : public Rekening {
             RekeningDeposito(string pemilik, string nomor, string tanggal, double saldoAwal);
 
             double hitungBunga() override;
-            bool cekJatuhTempo();
             void lihatInformasiRekening() override;
 
         private:

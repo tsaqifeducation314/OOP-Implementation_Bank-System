@@ -32,11 +32,6 @@ void Rekening :: lihatInformasiRekening() {
     cout << "Saldo           : " << saldo << endl; 
 }
 
-// fungsi untuk mengubah status rekening 
-void Rekening :: ubahStatus() {
-    statusRekening = !statusRekening;
-}
-
 // fungsi untuk menghitung bunga tahunan, bernilai 0 karena 
 double Rekening :: hitungBunga() {
     return 0;
