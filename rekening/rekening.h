@@ -15,8 +15,6 @@ class Rekening {
 
         virtual ~Rekening() {};
 
-        friend void tampilkanRingkasanRekening(const Rekening& rekening);
-
         string getNomorRekening() const; 
         bool getStatusRekening() const; 
         void setStatusRekening(bool status);
@@ -61,7 +59,7 @@ class RekeningGiro : public Rekening {
         void lihatInformasiRekening() override;
 
     private: 
-        double biayaAdministrasi = 180000;
+        double biayaAdministrasi = 600000;
 };
 
 
@@ -75,7 +73,7 @@ class RekeningDeposito : public Rekening {
 
         private:
             double nominalAwal; 
-            int jangkaWaktu;
+            int jangkaWaktu = 1;
             double sukuBunga = 5; 
             string tanggalJatuhTempo; 
 };

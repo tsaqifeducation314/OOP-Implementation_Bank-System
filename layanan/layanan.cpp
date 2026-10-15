@@ -183,13 +183,13 @@ void LayananBank :: buatRekening() {
         nomor++;
     } while (ditemukan);
 
-    cout << "Nomor Rekening                 : "
+    cout << "Nomor Rekening    : "
         << nomorRekening << endl;
     
-    cout << "Tanggal Pembukaan (DD-MM-YYYY) : ";
+    cout << "Tanggal Pembukaan : ";
     getline(cin, tanggalDibuka);
 
-    cout << "Saldo Awal                     : ";
+    cout << "Saldo Awal        : ";
     if (!(cin >> saldoAwal) || saldoAwal < 0) {
         cout << "Saldo awal tidak valid." << endl;
         cin.clear();

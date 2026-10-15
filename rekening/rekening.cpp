@@ -1,5 +1,6 @@
 #include "rekening.h"
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 // PARENT CLASS REKENING  
@@ -29,10 +30,10 @@ void Rekening :: lihatInformasiRekening() {
     } else {
         cout << "Tidak Aktif" << endl;
     }
-    cout << "Saldo           : " << saldo << endl; 
+    cout << "Saldo           : " << fixed << setprecision(2) << saldo << endl; 
 }
 
-// fungsi untuk menghitung bunga tahunan, bernilai 0 karena 
+// fungsi untuk menghitung bunga tahunan, bernilai 0 karena parent class 
 double Rekening :: hitungBunga() {
     return 0;
 }
@@ -40,13 +41,6 @@ double Rekening :: hitungBunga() {
 // fungsi untuk memvalidasi status aktif rekening 
 bool Rekening :: validasiStatusAktif() {
     return statusRekening;
-}
-
-// fungsi untuk menampilkan ringkasan rekening 
-void tampilkanRingkasanRekening(const Rekening& rekening) {
-     cout << "Nomor Rekening  : " << rekening.nomorRekening << endl;
-     cout << "Saldo           : " << rekening.saldo << endl;
-     cout << "Status          : " << rekening.statusRekening << endl;
 }
 
 // getter untuk nomor rekening 
@@ -68,8 +62,8 @@ double RekeningTabungan::hitungBunga() {
 // fungsi untuk melihat informasi rekening tabungan  
 void RekeningTabungan :: lihatInformasiRekening() {
     Rekening :: lihatInformasiRekening();
-    cout << "Suku Bunga      : " << sukuBunga << endl;
-    cout << "Saldo Minimum   : " << saldoMinimum << endl;
+    cout << "Bunga           : " << hitungBunga() << endl;
+    cout << "Saldo Minimum   : " << fixed << setprecision(2) << saldoMinimum << endl;
 }
 
 
@@ -93,7 +87,7 @@ bool RekeningGiro :: bayarBiayaAdministrasi() {
 // fungsi untuk melihat informasi rekening giro  
 void RekeningGiro :: lihatInformasiRekening() {
     Rekening :: lihatInformasiRekening();
-    cout << "Biaya Admin     : " << biayaAdministrasi << endl;
+    cout << "Biaya Admin     : " << fixed << setprecision(2) << biayaAdministrasi << endl;
 }
 
 
@@ -110,10 +104,9 @@ double RekeningDeposito :: hitungBunga() {
 // fungsi untuk melihat informasi rekening deposito  
 void RekeningDeposito :: lihatInformasiRekening() {
     Rekening :: lihatInformasiRekening();
-    cout << "Nominal Awal    : " << nominalAwal << endl; 
-    cout << "Jangka Waktu    : " << jangkaWaktu << endl; 
-    cout << "Suku Bunga      : " << sukuBunga << endl;
-    cout << "Jatuh Tempo     : " << tanggalJatuhTempo << endl;
+    cout << "Nominal Awal    : " << fixed << setprecision(2) << saldo << endl; 
+    cout << "Jangka Waktu    : " << jangkaWaktu << " tahun" << endl; 
+    cout << "Suku Bunga      : " << sukuBunga << " %" << endl;
 }
 
 // fungsi untuk setor dana 
