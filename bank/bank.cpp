@@ -19,7 +19,7 @@ void Bank :: tambahNasabah(const Nasabah& nasabah) {
     }
 
     daftarNasabah.push_back(nasabah); 
-    cout << "Nasabah berhasil ditambahkan ke " << namaBank << "." << endl;
+    cout << "Nasabah berhasil ditambahkan." << endl;
 }
 
 // fungsi untuk menghapus nasabah 

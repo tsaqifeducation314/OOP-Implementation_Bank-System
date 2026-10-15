@@ -1,2 +1,4 @@
 idTransaksi,tanggal,jumlah,jenis,status,keterangan,nomorRekening,nomorPengirim,nomorPenerima
-
+TRX1792070144-1,15-10-2026,100000,3,Berhasil,Transfer melalui menu nasabah,,1023456789,1023456793
+TRX1792070216-2,15-10-2026,100000,1,Berhasil,Setor tunai melalui menu nasabah,1023456789,,
+TRX1792070672-3,15-10-2026,200000,2,Berhasil,Tarik tunai melalui menu nasabah,1023456789,,

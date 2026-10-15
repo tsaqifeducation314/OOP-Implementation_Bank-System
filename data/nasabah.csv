@@ -1,2 +1,6 @@
 idNasabah,nama,tanggalLahir,alamat,nomorTelepon,email
-
+NS001,Adhi,01-01-2000,Ungaran,08123456789,adhi@email.com
+NS002,Bayu,02-02-2000,Salatiga,08811223344,bayu@email.com
+NS003,Cici,03-03-2000,Ambarawa,08822446688,cici@email.com
+NS004,Dedi,04-04-2000,Demak,08811335577,dedi@email.com
+NS005,Eko,05-05-2000,Magelang,08987654321,eko@email.com

@@ -9,7 +9,7 @@
 using namespace std;
 
 int main() {
-    LayananBank layanan("Bank Indonesia");
+    LayananBank layanan("Bank Berdikari");
     PenyimpananBank penyimpanan("data");
     Autentikasi autentikasi("admin", "admin123");
 
